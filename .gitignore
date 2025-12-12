@@ -1,0 +1,24 @@
+# Ignore Atmel Studio / Microchip Studio files
+*.atsuo
+*.atsln
+*.cproj
+*.componentinfo.xml
+
+# Ignore build output
+*.elf
+*.eep
+*.hex
+*.map
+*.srec
+*.lss
+*.o
+*.d
+*.mk
+
+# Ignore hidden VS folder
+.vs/
+Debug/
+Release/
+
+# Ignore simulation files
+*.sim1
