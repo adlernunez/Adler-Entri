@@ -64,4 +64,4 @@ FUNCTIONALITY
 2. External LEDs (PA11, PA12) blink alternately every 250ms
 3. Button is checked during LED blink delays for responsive control
 
-================================================================================
+
