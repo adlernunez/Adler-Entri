@@ -56,7 +56,7 @@ alt_blink.h
     - Blinks each LED for 250ms alternately
     - Integrated with button checking during delays.
 
-==============
+
 FUNCTIONALITY
 ==============
 
