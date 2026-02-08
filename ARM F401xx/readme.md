@@ -19,16 +19,16 @@ INTERNAL USER BUTTON:
 HEADER FILE STRUCTURE
 =======================
 
-stm32f401xx.h
+"stm32f401xx.h"
     - Defines base addresses of all GPIO peripherals
     - Contains register definitions for GPIO, RCC, SPI, I2C, USART
 
-STM32F401XX_gpio_driver.h
+"STM32F401XX_gpio_driver.h"
     - GPIO pin configuration definitions and macros
     - GPIO mode, speed, pull-up/pull-down, output type macros
     - Function prototypes for GPIO driver
 
-STM32F401XX_gpio_driver.c
+"STM32F401XX_gpio_driver.c"
     - Implementation of GPIO driver functions
     - GPIO initialization, read, write, toggle functions
     - Peripheral clock control logic
@@ -38,20 +38,20 @@ gpio_main.c (or gpio_toggle.c)
     - Calls GPIO functions in main loop
     - Integrates all functionality
 
-GPIO_setup.h
+"GPIO_setup.h"
     - GPIO initialization and configuration
     - Sets up all GPIO pins used in the project
     - Enables peripheral clocks
 
-Delay.h
+"Delay.h"
     - Software delay function (delay_ms)
     - Used for timing and debouncing
 
-button.h
+"button.h"
     - Button debouncing and state detection
     - Led_buttonfunction_ON_OFF() - toggles PA5 on button press
 
-alt_blink.h
+"alt_blink.h"
     - Alternating LED blink pattern (PA11 and PA12)
     - Blinks each LED for 250ms alternately
     - Integrated with button checking during delays.
