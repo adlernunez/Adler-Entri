@@ -15,7 +15,7 @@ EXTERNAL LEDs:
 INTERNAL USER BUTTON:
     BUTTON (B1)  = GPIO PORT C, PIN 13 (Active Low)
 
-=======================
+
 HEADER FILE STRUCTURE
 =======================
 
