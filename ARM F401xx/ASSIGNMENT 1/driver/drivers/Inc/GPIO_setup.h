@@ -5,7 +5,7 @@
 void GPIO_SETUP(){
 
 	GPIO_handle_t GpioLed;
-		GpioLed.pGPIOx = GPIOA;													    //SETTING GPIO PORT
+		GpioLed.pGPIOx 								        = GPIOA;				//SETTING GPIO PORT
 		GpioLed.GPIO_PinConfig.GPIO_PinNumber	 			= GPIO_PIN_NO_5;		//SETTING GPIO PIN
 		GpioLed.GPIO_PinConfig.GPIO_PinMode 				= GPIO_MODE_OUT;		//SETTING GPIO MODE
 		GpioLed.GPIO_PinConfig.GPIO_PinSpeed 				= GPIO_SPEED_HIGH;		//SETTING GPIO SPEED
