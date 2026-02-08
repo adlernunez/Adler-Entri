@@ -1,3 +1,6 @@
+#ifndef BUTTON_H_
+#define BUTTON_H_
+
 #include "stm32f401xx.h"
 #include "STM32F401XX_gpio_driver.h"
 #include "Delay.h"
@@ -15,7 +18,8 @@ void Led_buttonfunction_ON_OFF()
 	/*check for previous state and current_Buttonstate, if current_Buttonstate
 	 goes low then, it toggles, once pressed 5ms delay to take next input. Then updates the previous state.
 	*/
-	if((previous_Buttonstate ==1)&&(current_Buttonstate==0)){
+	if((previous_Buttonstate ==1)&&(current_Buttonstate==0))
+		{
 			GPIO_ToggleOutputPin(GPIOA,GPIO_PIN_NO_5);
 			while(GPIO_READFromInputPin(GPIOC, GPIO_PIN_NO_13) == 0);
 			delay_ms(10);
@@ -23,3 +27,4 @@ void Led_buttonfunction_ON_OFF()
 		previous_Buttonstate = current_Buttonstate;
 
 }
+#endif

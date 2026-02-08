@@ -14,8 +14,8 @@ int main (void){
 	while(1)
 	{
 
-		Led_buttonfunction_ON_OFF();
-		ALT_LEDblink();
+
+		ALT_LEDblink_Button_LED();
 
 	}
 }
