@@ -1,0 +1,7 @@
+2026-02-01 18:45:11,596 [INFO] Activator:176 - 
+
+
+2026-02-01 18:45:11,623 [INFO] Activator:177 - !SESSION log4j initialized
+2026-02-01 18:45:21,797 [INFO] LogOutputStream:77 - [STDOUT_REDIRECT] 
+2026-02-01 18:45:25,325 [ERROR] ConfigurationRetriever:142 - IOException on connection: Connect timed out
+2026-02-01 23:46:15,918 [ERROR] ConfigurationRetriever:142 - IOException on connection: Received fatal alert: internal_error
