@@ -1,0 +1,28 @@
+#include "stm32f401xx.h"
+#include "STM32F401XX_gpio_driver.h"
+#include "Delay.h"
+#include "button.h"
+
+void ALT_LEDblink_Button_LED()
+{
+    GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NO_11);
+
+    // 250ms total = 25 loops × 10ms
+    for(int i = 0; i < 25; i++)
+    {
+        delay_ms(10);
+        Led_buttonfunction_ON_OFF();  // Checking button ip
+    }
+
+    GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NO_11);
+    GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NO_12);
+
+    // Another 250ms with button checks
+    for(int i = 0; i < 25; i++)
+    {
+        delay_ms(10);
+        Led_buttonfunction_ON_OFF();  // Checking button ip
+    }
+
+    GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NO_12);
+}

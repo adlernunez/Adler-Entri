@@ -7,13 +7,13 @@
 
 int main (void){
 
-	GPIO_SETUP();					//contains gpio config settings
+	GPIO_SETUP();
 
 
 	while(1)
 	{
 
-		ALT_LEDblink_Button_LED(); //calling ALT_LEDblink_Button_LED function to main function
+		ALT_LEDblink_Button_LED();
 
 	}
 }

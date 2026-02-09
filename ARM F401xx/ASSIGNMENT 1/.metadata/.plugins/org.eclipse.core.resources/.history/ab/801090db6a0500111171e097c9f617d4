@@ -8,81 +8,88 @@
 
 #include "STM32F401XX_gpio_driver.h"
 
+//GPIO_PeriClockControl(GPIOA, ENABLE);
 /*************************************
- * @fn      - GPIO_PeriClockControl
- * @brief   - Enable or disable peripheral clock for GPIO ports
- *
- * @param[in] - pGPIOx: Pointer to GPIO port base address (GPIOA, GPIOB, etc.)
- * @param[in] - EnorDi: ENABLE or DISABLE macro
- *
- * @return  - None
- *
- * @note    - Must be called before using any GPIO port
- *          - Enables/disables clock in RCC AHB1ENR register
- *          - Supports ports: GPIOA, GPIOB, GPIOC, GPIOD, GPIOE, GPIOH
- *
- * @example - GPIO_PeriClockControl(GPIOA, ENABLE);  // Enable GPIOA clock
+ * @FN 			- GPIO_PERICLOCKCONTROL
+ * @BRIEF		- This fn enables or disables peripheral clock for the GPIO port
+ * @param(in)	- pGPIOx: base address of the GPIO peripheral (GPIOA, GPIOB....GPIOH)
+ * @PARAM(in)	- EnorDi: ENABLE OR DISABLE macros
+ * @return		- none
+ * @note		- none
  *************************************/
-void GPIO_PeriClockControl(GPIO_RegDef_t *pGPIOx, uint8_t EnorDi)
-{
-    if(EnorDi == ENABLE)
-    {
-        // Enable clock for the specified GPIO port
-        if(pGPIOx == GPIOA)
-        {
-            GPIOA_CLK_EN();  // Enable GPIOA clock
-        }
-        else if(pGPIOx == GPIOB)
-        {
-            GPIOB_CLK_EN();  // Enable GPIOB clock
-        }
-        else if(pGPIOx == GPIOC)
-        {
-            GPIOC_CLK_EN();  // Enable GPIOC clock
-        }
-        else if(pGPIOx == GPIOD)
-        {
-            GPIOD_CLK_EN();  // Enable GPIOD clock
-        }
-        else if(pGPIOx == GPIOE)
-        {
-            GPIOE_CLK_EN();  // Enable GPIOE clock
-        }
-        else if(pGPIOx == GPIOH)
-        {
-            GPIOH_CLK_EN();  // Enable GPIOH clock
-        }
-    }
-    else
-    {
-        // Disable clock for the specified GPIO port
-        if(pGPIOx == GPIOA)
-        {
-            GPIOA_CLK_DI();  // Disable GPIOA clock
-        }
-        else if(pGPIOx == GPIOB)
-        {
-            GPIOB_CLK_DI();  // Disable GPIOB clock
-        }
-        else if(pGPIOx == GPIOC)
-        {
-            GPIOC_CLK_DI();  // Disable GPIOC clock
-        }
-        else if(pGPIOx == GPIOD)
-        {
-            GPIOD_CLK_DI();  // Disable GPIOD clock
-        }
-        else if(pGPIOx == GPIOE)
-        {
-            GPIOE_CLK_DI();  // Disable GPIOE clock
-        }
-        else if(pGPIOx == GPIOH)
-        {
-            GPIOH_CLK_DI();  // Disable GPIOH clock
-        }
-    }
-}
 
+void GPIO_PeriClockControl(GPIO_RegDef_t*pGPIOx, uint8_t EnorDi)
+{
+
+	if(EnorDi == ENABLE)
+		{
+			if(pGPIOx == GPIOA)
+			{
+				GPIOA_CLK_EN();
+
+			}
+			else if (pGPIOx == GPIOB)
+			{
+				GPIOB_CLK_EN();
+
+			}
+			else if (pGPIOx == GPIOC)
+			{
+				GPIOC_CLK_EN();
+
+			}
+			else if (pGPIOx == GPIOD)
+			{
+				GPIOD_CLK_EN();
+
+			}
+			else if (pGPIOx == GPIOE)
+			{
+				GPIOE_CLK_EN();
+
+			}
+			else if (pGPIOx == GPIOH)
+			{
+				GPIOH_CLK_EN();
+
+			}
+		}
+		else
+		{
+
+			if(pGPIOx == GPIOA)
+			{
+				GPIOA_CLK_DI();
+
+			}
+			else if (pGPIOx == GPIOB)
+			{
+				GPIOB_CLK_DI();
+
+			}
+			else if (pGPIOx == GPIOC)
+			{
+				GPIOC_CLK_DI();
+
+			}
+			else if (pGPIOx == GPIOD)
+			{
+				GPIOD_CLK_DI();
+
+			}
+			else if (pGPIOx == GPIOE)
+			{
+				GPIOE_CLK_DI();
+
+			}
+			else if (pGPIOx == GPIOH)
+			{
+				GPIOH_CLK_DI();
+
+			}
+		}
+
+}
 
 
 void GPIO_Init(GPIO_handle_t *pGPIOHandle){
@@ -171,18 +178,13 @@ uint16_t GPIO_READFromInputPort(GPIO_RegDef_t *pGPIOx){
 
 }
 
+//GPIO_WriteToOututPin
 /*************************************
- * @fn      - GPIO_WriteToOutputPin
- * @brief   - Write digital value (HIGH/LOW) to a specific GPIO output pin
- *
- * @param[in] - pGPIOx: Pointer to GPIO port base address (GPIO_RegDef_t structure)
- * @param[in] - PinNumber: Pin number to write (0-15)
- * @param[in] - Value: Value to write (GPIO_PIN_SET or GPIO_PIN_RESET)
- *
- * @return  - None
- *
- * @note    - Pin must be configured as output before calling this function
- *          - Use GPIO_PIN_SET (1) for HIGH, GPIO_PIN_RESET (0) for LOW
+ * @FN 			- GPIO_WriteToOututPin
+ * @BRIEF		- This fn is to Write To Output Pin
+ * @param(in)	- GPIO  RegDef_t: pointer to GPIO GPIO Regdef_t structure
+ * @return		- uint16_t value inside that pin
+ * @note		- refer macros for gpio config
  *************************************/
 
 void GPIO_WriteToOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber, uint8_t Value){
@@ -197,43 +199,26 @@ void GPIO_WriteToOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber, uint8_t Val
 	}
 }
 
-/*************************************
- * @fn      - GPIO_WriteToOutputPort
- * @brief   - Write 16-bit value to entire GPIO port (all pins at once)
- *
- * @param[in] - pGPIOx: Pointer to GPIO port base address (GPIO_RegDef_t structure)
- * @param[in] - Value: 16-bit value to write (bit 0 = pin 0, bit 15 = pin 15)
- *
- * @return  - None
- *
- * @note    - Writes to all 16 pins simultaneously
- *          - Each bit in Value corresponds to a pin (0 = LOW, 1 = HIGH)
- *          - Pins must be configured as outputs beforehand
- *
- * @example - GPIO_WriteToOutputPort(GPIOA, 0x00FF); // Pins 0-7 HIGH, 8-15 LOW
- *************************************/
-
 void GPIO_WriteToOutputPort(GPIO_RegDef_t *pGPIOx, uint16_t Value){
 
 	pGPIOx->ODR = Value;
 
 }
 
+uint8_t GPIO_READFromOutputPin(GPIO_RegDef_t *pGPIOx,uint8_t PinNumber){
 
-/*************************************
- * @fn      - GPIO_ToggleOutputPin
- * @brief   - Toggle the state of a GPIO output pin (HIGH→LOW or LOW→HIGH)
- *
- * @param[in] - pGPIOx: Pointer to GPIO port base address (GPIO_RegDef_t structure)
- * @param[in] - PinNumber: Pin number to toggle (0-15)
- *
- * @return  - None
- *
- * @note    - Pin must be configured as OUTPUT before calling
- *          - Uses XOR operation on ODR register.
- *          - If pin is HIGH, becomes LOW; if LOW, becomes HIGH
- *
- *************************************/
+	uint8_t value;
+	value = (uint8_t)((pGPIOx->ODR>>PinNumber)& 0x00000001);
+	return value;
+}
+
+uint16_t GPIO_READFromOutputPort(GPIO_RegDef_t *pGPIOx){
+
+	uint16_t value;
+	value = (uint16_t)pGPIOx->ODR;
+	return value;
+
+}
 
 void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber){
 	pGPIOx->ODR ^=(1<<PinNumber);

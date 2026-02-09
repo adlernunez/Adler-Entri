@@ -5,23 +5,30 @@
 
 void ALT_LEDblink_Button_LED()
 {
-    GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NO_11);
-
-    // 250ms total = 25 loops × 10ms
-    for(int i = 0; i < 25; i++)
-    {
-        delay_ms(10);
-        Led_buttonfunction_ON_OFF();  // Checking button ip
-    }
-
-    GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NO_11);
-    GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NO_12);
+    GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NO_11); // toggle led1 at PA11
 
     // Another 250ms with button checks
+        //10ms x 250 times is 250ms
+        //between every10ms we can check the input from the button to work simultaneously.
+        //another option is to create a timer function.
     for(int i = 0; i < 25; i++)
     {
         delay_ms(10);
-        Led_buttonfunction_ON_OFF();  // Checking button ip
+        Led_buttonfunction_ON_OFF();  			// Checking button ip
+    }
+    GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NO_11); // toggle led1 at PA11
+
+
+    GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NO_12); // toggle led2 at PA12
+
+    // Another 250ms with button checks
+    //10ms x 250 times is 250ms
+    //between every10ms we can check the input from the button to work simultaneously.
+    //another option is to create a timer function.
+    for(int i = 0; i < 25; i++)
+    {
+        delay_ms(10);
+        Led_buttonfunction_ON_OFF();  			// Checking button ip
     }
 
     GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NO_12);

@@ -8,81 +8,88 @@
 
 #include "STM32F401XX_gpio_driver.h"
 
+//GPIO_PeriClockControl(GPIOA, ENABLE);
 /*************************************
- * @fn      - GPIO_PeriClockControl
- * @brief   - Enable or disable peripheral clock for GPIO ports
- *
- * @param[in] - pGPIOx: Pointer to GPIO port base address (GPIOA, GPIOB, etc.)
- * @param[in] - EnorDi: ENABLE or DISABLE macro
- *
- * @return  - None
- *
- * @note    - Must be called before using any GPIO port
- *          - Enables/disables clock in RCC AHB1ENR register
- *          - Supports ports: GPIOA, GPIOB, GPIOC, GPIOD, GPIOE, GPIOH
- *
- * @example - GPIO_PeriClockControl(GPIOA, ENABLE);  // Enable GPIOA clock
+ * @FN 			- GPIO_PERICLOCKCONTROL
+ * @BRIEF		- This fn enables or disables peripheral clock for the GPIO port
+ * @param(in)	- pGPIOx: base address of the GPIO peripheral (GPIOA, GPIOB....GPIOH)
+ * @PARAM(in)	- EnorDi: ENABLE OR DISABLE macros
+ * @return		- none
+ * @note		- none
  *************************************/
-void GPIO_PeriClockControl(GPIO_RegDef_t *pGPIOx, uint8_t EnorDi)
-{
-    if(EnorDi == ENABLE)
-    {
-        // Enable clock for the specified GPIO port
-        if(pGPIOx == GPIOA)
-        {
-            GPIOA_CLK_EN();  // Enable GPIOA clock
-        }
-        else if(pGPIOx == GPIOB)
-        {
-            GPIOB_CLK_EN();  // Enable GPIOB clock
-        }
-        else if(pGPIOx == GPIOC)
-        {
-            GPIOC_CLK_EN();  // Enable GPIOC clock
-        }
-        else if(pGPIOx == GPIOD)
-        {
-            GPIOD_CLK_EN();  // Enable GPIOD clock
-        }
-        else if(pGPIOx == GPIOE)
-        {
-            GPIOE_CLK_EN();  // Enable GPIOE clock
-        }
-        else if(pGPIOx == GPIOH)
-        {
-            GPIOH_CLK_EN();  // Enable GPIOH clock
-        }
-    }
-    else
-    {
-        // Disable clock for the specified GPIO port
-        if(pGPIOx == GPIOA)
-        {
-            GPIOA_CLK_DI();  // Disable GPIOA clock
-        }
-        else if(pGPIOx == GPIOB)
-        {
-            GPIOB_CLK_DI();  // Disable GPIOB clock
-        }
-        else if(pGPIOx == GPIOC)
-        {
-            GPIOC_CLK_DI();  // Disable GPIOC clock
-        }
-        else if(pGPIOx == GPIOD)
-        {
-            GPIOD_CLK_DI();  // Disable GPIOD clock
-        }
-        else if(pGPIOx == GPIOE)
-        {
-            GPIOE_CLK_DI();  // Disable GPIOE clock
-        }
-        else if(pGPIOx == GPIOH)
-        {
-            GPIOH_CLK_DI();  // Disable GPIOH clock
-        }
-    }
-}
 
+void GPIO_PeriClockControl(GPIO_RegDef_t*pGPIOx, uint8_t EnorDi)
+{
+
+	if(EnorDi == ENABLE)
+		{
+			if(pGPIOx == GPIOA)
+			{
+				GPIOA_CLK_EN();
+
+			}
+			else if (pGPIOx == GPIOB)
+			{
+				GPIOB_CLK_EN();
+
+			}
+			else if (pGPIOx == GPIOC)
+			{
+				GPIOC_CLK_EN();
+
+			}
+			else if (pGPIOx == GPIOD)
+			{
+				GPIOD_CLK_EN();
+
+			}
+			else if (pGPIOx == GPIOE)
+			{
+				GPIOE_CLK_EN();
+
+			}
+			else if (pGPIOx == GPIOH)
+			{
+				GPIOH_CLK_EN();
+
+			}
+		}
+		else
+		{
+
+			if(pGPIOx == GPIOA)
+			{
+				GPIOA_CLK_DI();
+
+			}
+			else if (pGPIOx == GPIOB)
+			{
+				GPIOB_CLK_DI();
+
+			}
+			else if (pGPIOx == GPIOC)
+			{
+				GPIOC_CLK_DI();
+
+			}
+			else if (pGPIOx == GPIOD)
+			{
+				GPIOD_CLK_DI();
+
+			}
+			else if (pGPIOx == GPIOE)
+			{
+				GPIOE_CLK_DI();
+
+			}
+			else if (pGPIOx == GPIOH)
+			{
+				GPIOH_CLK_DI();
+
+			}
+		}
+
+}
 
 
 void GPIO_Init(GPIO_handle_t *pGPIOHandle){
