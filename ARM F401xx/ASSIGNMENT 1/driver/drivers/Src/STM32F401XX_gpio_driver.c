@@ -1,9 +1,3 @@
-/*
- * STM32F401XX_gpio_driver.c
- *
- *  Created on: 01-Feb-2026
- *      Author: adler
- */
 
 
 #include "STM32F401XX_gpio_driver.h"
