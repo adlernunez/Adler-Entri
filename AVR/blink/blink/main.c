@@ -10,14 +10,12 @@
 
 int main(void)
 {
-	DDRB=0b00010000;
+	DDRB|=(1<<DDB5);
     /* Replace with your application code */
     while (1) 
     {
-		PORTB=0b00010000;//set at B5, is high
-		_delay_ms(3000);
-		PORTB=0b00010000;// set at B5, is low
-		_delay_ms(3000);
+		PORTB^=(1<<PB5);
+		_delay_ms(1000);
     }
 }
 
