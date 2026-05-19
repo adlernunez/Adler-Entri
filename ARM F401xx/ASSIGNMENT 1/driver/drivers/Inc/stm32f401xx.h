@@ -332,14 +332,14 @@ typedef struct
 /*
  *   SPI Clock Enable
  */
-#define SPI1_CLK_EN()  (RCC->APB2ENR|=(1<<12))// Set Bit12 for SPI1
+#define SPI1_CLK_EN() (RCC->APB2ENR|=(1<<12))// Set Bit12 for SPI1
 #define SPI4_CLK_EN() (RCC->APB2ENR|=(1<<13))// Set Bit13 for SPI4
 #define SPI2_CLK_EN() (RCC->APB1ENR|=(1<<14))// Set Bit14 for SPI2
 #define SPI3_CLK_EN() (RCC->APB1ENR|=(1<<15))// Set Bit15 for SPI3
 /*
  *   SPI Clock Disable
  */
-#define SPI1_CLK_DI()  (RCC->APB2ENR&=~(1<<12))// Clear Bit12 for SPI1
+#define SPI1_CLK_DI() (RCC->APB2ENR&=~(1<<12))// Clear Bit12 for SPI1
 #define SPI4_CLK_DI() (RCC->APB2ENR&=~(1<<13))// Clear Bit13 for SPI4
 #define SPI2_CLK_DI() (RCC->APB1ENR&=~(1<<14))// Clear Bit14 for SPI2
 #define SPI3_CLK_DI() (RCC->APB1ENR&=~(1<<15))// Clear Bit15 for SPI3
