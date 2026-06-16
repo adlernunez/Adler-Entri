@@ -1,0 +1,98 @@
+#include <stdint.h>
+#include <stdio.h>
+#include "stm32f401re_usart_driver.h"
+#include "dht11_driver.h"
+
+#define TEMP_THRESHOLD 30 // Set your high temperature limit here
+
+int main(void)
+{
+    char string[60];
+
+    // 1. Initialize USART2 (PA2 TX, PA3 RX)
+    // NOTE: PA2 will be overwritten by the Green LED setup below.
+    usart2_GPIO_PinSetUp();
+    USART_Handle_t usart2 = {0};
+    usart2.pUSARTx = USART2;
+    usart2.USART_Config.USART_Baud = USART_STD_BAUD_9600;
+    usart2.USART_Config.USART_Mode = USART_MODE_RXTX;
+    usart2.USART_Config.USART_Parity = USART_NO_PARITY;
+    usart2.USART_Config.USART_StopBit = USART_STOP_BIT_1;
+    usart2.USART_Config.USART_WordLength = USART_WORDLEN_8BITS;
+    usart2.USART_Config.USART_OverSampling = USART_OVERSAMPLING_16;
+    usart2.USART_Config.USART_HWflowControl = USART_NO_CTS_RTS;
+    USART_Init(&usart2);
+    USART_PeripheralControl(USART2, ENABLE);
+
+    // 2. Initialize the DHT11 Sensor
+    DHT11_Init();
+    DHT11_Data_t mySensorData = {0};
+
+    // 3. Initialize LEDs
+    // RED LED on PA0
+    GPIO_handle_t led_red = {0};
+    led_red.pGPIOx = GPIOA;
+    led_red.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_0;
+    led_red.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
+    led_red.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+    led_red.GPIO_PinConfig.GPIO_PinOPType = GPIO_PUSHPULL;
+    led_red.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPD;
+    GPIO_Init(&led_red);
+
+    // GREEN LED on PA2 (Overwrites USART2 TX)
+    GPIO_handle_t led_green = {0};
+    led_green.pGPIOx = GPIOA;
+    led_green.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_2;
+    led_green.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
+    led_green.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+    led_green.GPIO_PinConfig.GPIO_PinOPType = GPIO_PUSHPULL;
+    led_green.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPD;
+    GPIO_Init(&led_green);
+
+    // This won't show up on the monitor due to the PA2 overwrite
+    USART_Transmit_String(USART2, "System Initialized. Starting reading loop...\r\n");
+
+    while(1)
+    {
+        for(uint32_t ms = 0; ms < 2000; ms++) {
+            for(uint32_t us = 0; us < 1000; us++) {
+                while(!(SYSTICK->CTRL & (1<<16)));
+            }
+        }
+
+        uint8_t status = DHT11_Read(&mySensorData);
+
+        if(status == DHT11_OK)
+        {
+            sprintf(string, "Temp: %d.%d C  |  Humidity: %d.%d %%\r\n",
+                    mySensorData.temp_int, mySensorData.temp_dec,
+                    mySensorData.hum_int, mySensorData.hum_dec);
+
+            // --- LED LOGIC ---
+            if(mySensorData.temp_int >= TEMP_THRESHOLD) {
+                // Temp High: Red ON (PA0), Green OFF (PA2)
+                GPIO_WriteToOutputPin(GPIOA, 0, GPIO_PIN_SET);
+                GPIO_WriteToOutputPin(GPIOA, 2, GPIO_PIN_RESET);
+            } else {
+                // Temp Normal: Green ON (PA2), Red OFF (PA0)
+                GPIO_WriteToOutputPin(GPIOA, 2, GPIO_PIN_SET);
+                GPIO_WriteToOutputPin(GPIOA, 0, GPIO_PIN_RESET);
+            }
+        }
+        else
+        {
+            if(status == DHT11_ERROR_CHECKSUM) {
+                sprintf(string, "DHT11 Error: Checksum failed. Data corrupted.\r\n");
+            } else if(status == DHT11_ERROR_TIMEOUT) {
+                sprintf(string, "DHT11 Error: Sensor timeout. Check wiring.\r\n");
+            }
+
+            // Turn off both LEDs on error
+            GPIO_WriteToOutputPin(GPIOA, 0, GPIO_PIN_RESET);
+            GPIO_WriteToOutputPin(GPIOA, 2, GPIO_PIN_RESET);
+        }
+
+        // Send results to Serial Monitor (Will fail to transmit)
+        USART_Transmit_String(USART2, string);
+    }
+}

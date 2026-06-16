@@ -1,0 +1,59 @@
+#include <stdint.h>
+#include <stdio.h>
+#include "STM32F401XX_gpio_driver.h"
+#include "stm32f401re_usart_driver.h"
+#include "HCSR04_DRIVER.h"
+
+// 1. Setup USART Pins (PA2 = TX, PA3 = RX)
+void USART2_GPIO_Setup(void)
+{
+    GPIO_PeriClockControl(GPIOA, ENABLE);
+
+    GPIO_handle_t usart_pins = {0};
+    usart_pins.pGPIOx = GPIOA;
+    usart_pins.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_ALTFN;
+    usart_pins.GPIO_PinConfig.GPIO_PinAltFunction = 7;
+    usart_pins.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+    usart_pins.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_PULLUP;
+    usart_pins.GPIO_PinConfig.GPIO_PinOPType = GPIO_PUSHPULL;
+
+    usart_pins.GPIO_PinConfig.GPIO_PinNumber = 2; // PA2
+    GPIO_Init(&usart_pins);
+
+    usart_pins.GPIO_PinConfig.GPIO_PinNumber = 3; // PA3
+    GPIO_Init(&usart_pins);
+}
+
+// 2. Setup LED Pins (PA0 = Red, PA5 = Green)
+void LED_GPIO_Setup(void)
+{
+    GPIO_PeriClockControl(GPIOA, ENABLE);
+
+    GPIO_handle_t GpioLeds = {0};
+    GpioLeds.pGPIOx = GPIOA;
+    GpioLeds.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
+    GpioLeds.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+    GpioLeds.GPIO_PinConfig.GPIO_PinOPType = GPIO_PUSHPULL;
+    GpioLeds.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPD;
+
+    // Configure PA0 (Red LED)
+    GpioLeds.GPIO_PinConfig.GPIO_PinNumber = 0;
+    GPIO_Init(&GpioLeds);
+
+    // Configure PA5 (Green LED)
+    GpioLeds.GPIO_PinConfig.GPIO_PinNumber = 5;
+    GPIO_Init(&GpioLeds);
+}
+
+int main(void)
+{
+    // 1. Initialize the GPIO pins
+    USART2_GPIO_Setup();
+    LED_GPIO_Setup();
+
+    // 2. Initialize USART2 Configurations
+    USART_Handle_t usart2 = {0};
+    usart2.pUSARTx = USART2;
+    usart2.USART_Config.USART_Baud = USART_STD_BAUD_9600;
+    usart2.USART_Config.USART_Mode = USART_MODE_RXTX;
+    usart2.USART_Config.USART

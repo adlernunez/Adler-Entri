@@ -1,0 +1,100 @@
+#include <stdint.h>
+#include <stdio.h>
+#include "STM32F401XX_gpio_driver.h"
+#include "stm32f401re_usart_driver.h"
+#include "HCSR04_DRIVER.h"
+
+// 1. Setup USART Pins
+void USART2_GPIO_Setup(void)
+{
+    GPIO_handle_t usart_pins = {0};
+    usart_pins.pGPIOx = GPIOA;
+    usart_pins.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_ALTFN;
+    usart_pins.GPIO_PinConfig.GPIO_PinAltFunction = 7; // AF7 connects to USART2
+    usart_pins.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+    usart_pins.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_PULLUP;
+    usart_pins.GPIO_PinConfig.GPIO_PinOPType = GPIO_PUSHPULL;
+
+    // Initialize PA2 as TX
+    usart_pins.GPIO_PinConfig.GPIO_PinNumber = 2;
+    GPIO_Init(&usart_pins);
+
+    // Initialize PA3 as RX
+    usart_pins.GPIO_PinConfig.GPIO_PinNumber = 3;
+    GPIO_Init(&usart_pins);
+}
+
+// 2. Setup LED Pins (Replaces the Buzzer)
+void LED_GPIO_Setup(void)
+{
+    GPIO_Handle_t GpioLeds = {0};
+    GpioLeds.pGPIOx = GPIOA;
+    GpioLeds.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
+    GpioLeds.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+    GpioLeds.GPIO_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_PP;
+    GpioLeds.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPD;
+
+    GPIO_PeriClockControl(GPIOA, ENABLE);
+
+    // Configure PA0 (Red LED)
+    GpioLeds.GPIO_PinConfig.GPIO_PinNumber = 0;
+    GPIO_Init(&GpioLeds);
+
+    // Configure PA5 (Green LED)
+    GpioLeds.GPIO_PinConfig.GPIO_PinNumber = 5;
+    GPIO_Init(&GpioLeds);
+}
+
+int main(void)
+{
+    // Initialize standard systems
+    USART2_GPIO_Setup();
+
+    USART_Handle_t usart2 = {0};
+    usart2.pUSARTx = USART2;
+    usart2.USART_Config.USART_Baud = USART_STD_BAUD_9600;
+    usart2.USART_Config.USART_Mode = USART_MODE_RXTX;
+    usart2.USART_Config.USART_Parity = USART_NO_PARITY;
+    usart2.USART_Config.USART_StopBit = USART_STOP_BIT_1;
+    usart2.USART_Config.USART_WordLength = USART_WORDLEN_8BITS;
+
+    USART_Init(&usart2);
+    USART_PeripheralControl(USART2, ENABLE);
+
+    SysTick_Delay_init();
+
+    // This initializes PA1 (Trig) and PA4 (Echo) based on your sensor driver
+    GPIO_setup();
+    Timer2_Init();
+
+    // Initialize our new custom LEDs
+    LED_GPIO_Setup();
+
+    int distance;
+    char string[40];
+
+    while(1)
+    {
+        distance = HCSR04_GetDistance();            /* MEASURE DISTANCE */
+
+        if(distance < 10)
+        {
+            // DANGER: Turn Red ON, Turn Green OFF
+            GPIO_WriteToOutputPin(GPIOA, 0, 1);
+            GPIO_WriteToOutputPin(GPIOA, 5, 0);
+        }
+        else
+        {
+            // SAFE: Turn Red OFF, Turn Green ON
+            GPIO_WriteToOutputPin(GPIOA, 0, 0);
+            GPIO_WriteToOutputPin(GPIOA, 5, 1);
+        }
+
+        // Format the string and transmit it to the serial monitor
+        sprintf(string, "Distance : %02d cm\n\r", distance);
+        USART_Transmit_String(USART2, string);
+
+        // 500ms delay for a more readable serial monitor output
+        Delay_us(500000);
+    }
+}

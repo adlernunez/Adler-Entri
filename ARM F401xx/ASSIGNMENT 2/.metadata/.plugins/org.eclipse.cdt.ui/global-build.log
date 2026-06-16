@@ -1,0 +1,287 @@
+00:33:41 **** Incremental Build of configuration Debug for project driver ****
+make -j16 all 
+arm-none-eabi-gcc "../projects/temp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"projects/temp.d" -MT"projects/temp.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "projects/temp.o"
+arm-none-eabi-gcc -o "driver.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Projects\ARM F401xx\ASSIGNMENT 2\driver\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: driver.elf
+ 
+arm-none-eabi-size  driver.elf 
+arm-none-eabi-objdump -h -S driver.elf  > "driver.list"
+   text	   data	    bss	    dec	    hex	filename
+   6832	     80	   1896	   8808	   2268	driver.elf
+Finished building: default.size.stdout
+ 
+Finished building: driver.list
+ 
+00:33:45 **** Incremental Build of configuration Debug for project driver ****
+make -j16 all 
+arm-none-eabi-size  driver.elf 
+   text	   data	    bss	    dec	    hex	filename
+   6832	     80	   1896	   8808	   2268	driver.elf
+Finished building: default.size.stdout
+ 
+00:35:18 **** Incremental Build of configuration Debug for project driver ****
+make -j16 all 
+arm-none-eabi-gcc "../projects/temp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"projects/temp.d" -MT"projects/temp.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "projects/temp.o"
+../projects/temp.c: In function 'main':
+../projects/temp.c:68:29: warning: too many arguments for format [-Wformat-extra-args]
+   68 |             sprintf(string, "Temp: %d.%d C",
+      |                             ^~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "driver.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Projects\ARM F401xx\ASSIGNMENT 2\driver\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: driver.elf
+ 
+arm-none-eabi-size  driver.elf 
+arm-none-eabi-objdump -h -S driver.elf  > "driver.list"
+   text	   data	    bss	    dec	    hex	filename
+   6808	     80	   1896	   8784	   2250	driver.elf
+Finished building: default.size.stdout
+ 
+Finished building: driver.list
+ 
+00:36:28 **** Incremental Build of configuration Debug for project driver ****
+make -j16 all 
+arm-none-eabi-gcc "../projects/temp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"projects/temp.d" -MT"projects/temp.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "projects/temp.o"
+../projects/temp.c: In function 'main':
+../projects/temp.c:68:29: warning: too many arguments for format [-Wformat-extra-args]
+   68 |             sprintf(string, "Temp: %d.%d C %%\r\n",
+      |                             ^~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "driver.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Projects\ARM F401xx\ASSIGNMENT 2\driver\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: driver.elf
+ 
+arm-none-eabi-size  driver.elf 
+arm-none-eabi-objdump -h -S driver.elf  > "driver.list"
+   text	   data	    bss	    dec	    hex	filename
+   6812	     80	   1896	   8788	   2254	driver.elf
+Finished building: default.size.stdout
+ 
+Finished building: driver.list
+ 
+00:38:09 **** Incremental Build of configuration Debug for project driver ****
+make -j16 all 
+arm-none-eabi-gcc "../projects/temp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"projects/temp.d" -MT"projects/temp.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "projects/temp.o"
+arm-none-eabi-gcc -o "driver.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Projects\ARM F401xx\ASSIGNMENT 2\driver\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: driver.elf
+ 
+arm-none-eabi-size  driver.elf 
+arm-none-eabi-objdump -h -S driver.elf  > "driver.list"
+   text	   data	    bss	    dec	    hex	filename
+   6632	     80	   1896	   8608	   21a0	driver.elf
+Finished building: default.size.stdout
+ 
+Finished building: driver.list
+ 
+00:38:58 **** Incremental Build of configuration Debug for project driver ****
+make -j16 all 
+arm-none-eabi-gcc "../projects/temp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"projects/temp.d" -MT"projects/temp.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "projects/temp.o"
+../projects/temp.c: In function 'main':
+../projects/temp.c:68:29: warning: too many arguments for format [-Wformat-extra-args]
+   68 |             sprintf(string, "Temp: %d.%d C %%\r\n",
+      |                             ^~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "driver.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Projects\ARM F401xx\ASSIGNMENT 2\driver\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: driver.elf
+ 
+arm-none-eabi-size  driver.elf 
+arm-none-eabi-objdump -h -S driver.elf  > "driver.list"
+   text	   data	    bss	    dec	    hex	filename
+   6812	     80	   1896	   8788	   2254	driver.elf
+Finished building: default.size.stdout
+ 
+Finished building: driver.list
+ 
+00:40:02 **** Incremental Build of configuration Debug for project driver ****
+make -j16 all 
+arm-none-eabi-gcc "../projects/temp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"projects/temp.d" -MT"projects/temp.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "projects/temp.o"
+../projects/temp.c: In function 'main':
+../projects/temp.c:68:29: warning: too many arguments for format [-Wformat-extra-args]
+   68 |             sprintf(string, "Temp: %d.%d C %%\r\n",
+      |                             ^~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "driver.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Projects\ARM F401xx\ASSIGNMENT 2\driver\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: driver.elf
+ 
+arm-none-eabi-size  driver.elf 
+arm-none-eabi-objdump -h -S driver.elf  > "driver.list"
+   text	   data	    bss	    dec	    hex	filename
+   6812	     80	   1896	   8788	   2254	driver.elf
+Finished building: default.size.stdout
+ 
+Finished building: driver.list
+ 
+00:41:28 **** Incremental Build of configuration Debug for project driver ****
+make -j16 all 
+arm-none-eabi-gcc "../projects/temp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"projects/temp.d" -MT"projects/temp.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "projects/temp.o"
+../projects/temp.c: In function 'main':
+../projects/temp.c:68:41: warning: too many arguments for format [-Wformat-extra-args]
+   68 |                         sprintf(string, "Temp: %d.%d C %%\r\n",
+      |                                         ^~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "driver.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Projects\ARM F401xx\ASSIGNMENT 2\driver\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: driver.elf
+ 
+arm-none-eabi-size  driver.elf 
+arm-none-eabi-objdump -h -S driver.elf  > "driver.list"
+   text	   data	    bss	    dec	    hex	filename
+   6812	     80	   1896	   8788	   2254	driver.elf
+Finished building: default.size.stdout
+ 
+Finished building: driver.list
+ 
+00:43:09 **** Incremental Build of configuration Debug for project driver ****
+make -j16 all 
+arm-none-eabi-gcc "../projects/temp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"projects/temp.d" -MT"projects/temp.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "projects/temp.o"
+arm-none-eabi-gcc -o "driver.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Projects\ARM F401xx\ASSIGNMENT 2\driver\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: driver.elf
+ 
+arm-none-eabi-size  driver.elf 
+arm-none-eabi-objdump -h -S driver.elf  > "driver.list"
+   text	   data	    bss	    dec	    hex	filename
+   6832	     80	   1896	   8808	   2268	driver.elf
+Finished building: default.size.stdout
+ 
+Finished building: driver.list
+ 
+00:47:20 **** Incremental Build of configuration Debug for project driver ****
+make -j16 all 
+arm-none-eabi-gcc "../projects/temp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"projects/temp.d" -MT"projects/temp.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "projects/temp.o"
+../projects/temp.c: In function 'main':
+../projects/temp.c:61:9: error: expected declaration or statement at end of input
+   61 |         }
+      |         ^
+../projects/temp.c:61:9: error: expected declaration or statement at end of input
+../projects/temp.c:29:18: warning: unused variable 'mySensorData' [-Wunused-variable]
+   29 |     DHT11_Data_t mySensorData = {0};
+      |                  ^~~~~~~~~~~~
+../projects/temp.c:11:10: warning: unused variable 'string' [-Wunused-variable]
+   11 |     char string[60];
+      |          ^~~~~~
+make: *** [projects/subdir.mk:19: projects/temp.o] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+00:48:43 **** Incremental Build of configuration Debug for project driver ****
+make -j16 all 
+arm-none-eabi-gcc "../projects/temp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"projects/temp.d" -MT"projects/temp.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "projects/temp.o"
+../projects/temp.c: In function 'main':
+../projects/temp.c:69:29: error: 'DHT11_Data_t' has no member named 'hum'
+   69 |                 mySensorData.hum
+      |                             ^
+../projects/temp.c:69:33: error: expected ')' at end of input
+   69 |                 mySensorData.hum
+      |                                 ^
+      |                                 )
+../projects/temp.c:67:16: note: to match this '('
+   67 |         sprintf(string, "Temp: %d.%d C  |  Humidity: %d.%d %%\r\n",
+      |                ^
+../projects/temp.c:69:17: error: expected declaration or statement at end of input
+   69 |                 mySensorData.hum
+      |                 ^~~~~~~~~~~~
+../projects/temp.c:69:17: error: expected declaration or statement at end of input
+make: *** [projects/subdir.mk:19: projects/temp.o] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+00:49:10 **** Incremental Build of configuration Debug for project driver ****
+make -j16 all 
+arm-none-eabi-gcc "../projects/temp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"projects/temp.d" -MT"projects/temp.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "projects/temp.o"
+arm-none-eabi-gcc -o "driver.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Projects\ARM F401xx\ASSIGNMENT 2\driver\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: driver.elf
+ 
+arm-none-eabi-size  driver.elf 
+arm-none-eabi-objdump -h -S driver.elf  > "driver.list"
+   text	   data	    bss	    dec	    hex	filename
+   6656	     80	   1896	   8632	   21b8	driver.elf
+Finished building: default.size.stdout
+ 
+Finished building: driver.list
+ 
+00:58:43 **** Incremental Build of configuration Debug for project driver ****
+make -j16 all 
+arm-none-eabi-gcc "../projects/temp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"projects/temp.d" -MT"projects/temp.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "projects/temp.o"
+arm-none-eabi-gcc -o "driver.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Projects\ARM F401xx\ASSIGNMENT 2\driver\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: driver.elf
+ 
+arm-none-eabi-size  driver.elf 
+arm-none-eabi-objdump -h -S driver.elf  > "driver.list"
+   text	   data	    bss	    dec	    hex	filename
+   6664	     80	   1896	   8640	   21c0	driver.elf
+Finished building: default.size.stdout
+ 
+Finished building: driver.list
+ 
+01:03:52 **** Incremental Build of configuration Debug for project driver ****
+make -j16 all 
+arm-none-eabi-gcc "../projects/temp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"projects/temp.d" -MT"projects/temp.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "projects/temp.o"
+arm-none-eabi-gcc -o "driver.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Projects\ARM F401xx\ASSIGNMENT 2\driver\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: driver.elf
+ 
+arm-none-eabi-size  driver.elf 
+arm-none-eabi-objdump -h -S driver.elf  > "driver.list"
+   text	   data	    bss	    dec	    hex	filename
+   6408	     80	   1896	   8384	   20c0	driver.elf
+Finished building: default.size.stdout
+ 
+Finished building: driver.list
+ 
+01:04:23 **** Incremental Build of configuration Debug for project driver ****
+make -j16 all 
+arm-none-eabi-gcc "../projects/temp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"projects/temp.d" -MT"projects/temp.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "projects/temp.o"
+arm-none-eabi-gcc -o "driver.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Projects\ARM F401xx\ASSIGNMENT 2\driver\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: driver.elf
+ 
+arm-none-eabi-size  driver.elf 
+arm-none-eabi-objdump -h -S driver.elf  > "driver.list"
+   text	   data	    bss	    dec	    hex	filename
+   6408	     80	   1896	   8384	   20c0	driver.elf
+Finished building: default.size.stdout
+ 
+Finished building: driver.list
+ 
+01:04:57 **** Incremental Build of configuration Debug for project driver ****
+make -j16 all 
+arm-none-eabi-gcc "../projects/temp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"projects/temp.d" -MT"projects/temp.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "projects/temp.o"
+arm-none-eabi-gcc -o "driver.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Projects\ARM F401xx\ASSIGNMENT 2\driver\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: driver.elf
+ 
+arm-none-eabi-size  driver.elf 
+arm-none-eabi-objdump -h -S driver.elf  > "driver.list"
+   text	   data	    bss	    dec	    hex	filename
+   6404	     80	   1896	   8380	   20bc	driver.elf
+Finished building: default.size.stdout
+ 
+Finished building: driver.list
+ 
+01:07:07 **** Incremental Build of configuration Debug for project driver ****
+make -j16 all 
+arm-none-eabi-gcc "../projects/temp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"projects/temp.d" -MT"projects/temp.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "projects/temp.o"
+arm-none-eabi-gcc -o "driver.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Projects\ARM F401xx\ASSIGNMENT 2\driver\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: driver.elf
+ 
+arm-none-eabi-size  driver.elf 
+arm-none-eabi-objdump -h -S driver.elf  > "driver.list"
+   text	   data	    bss	    dec	    hex	filename
+   6480	     80	   1896	   8456	   2108	driver.elf
+Finished building: default.size.stdout
+ 
+Finished building: driver.list
+ 
+01:13:45 **** Incremental Build of configuration Debug for project driver ****
+make -j16 all 
+arm-none-eabi-gcc "../projects/temp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"projects/temp.d" -MT"projects/temp.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "projects/temp.o"
+arm-none-eabi-gcc -o "driver.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Projects\ARM F401xx\ASSIGNMENT 2\driver\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: driver.elf
+ 
+arm-none-eabi-size  driver.elf 
+arm-none-eabi-objdump -h -S driver.elf  > "driver.list"
+   text	   data	    bss	    dec	    hex	filename
+   6480	     80	   1896	   8456	   2108	driver.elf
+Finished building: default.size.stdout
+ 
+Finished building: driver.list
+ 
+01:21:14 **** Incremental Build of configuration Debug for project driver ****
+make -j16 all 
+arm-none-eabi-gcc "../projects/temp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"projects/temp.d" -MT"projects/temp.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "projects/temp.o"
+arm-none-eabi-gcc -o "driver.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Projects\ARM F401xx\ASSIGNMENT 2\driver\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: driver.elf
+ 
+arm-none-eabi-size  driver.elf 
+arm-none-eabi-objdump -h -S driver.elf  > "driver.list"
+   text	   data	    bss	    dec	    hex	filename
+   6480	     80	   1896	   8456	   2108	driver.elf
+Finished building: default.size.stdout
+ 
+Finished building: driver.list
+ 

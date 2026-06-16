@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;driver/projects/assignment2.c&apos; to &apos;distance.c&apos;" description="Rename resource &apos;assignment2.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="projects/assignment2.c" name="distance.c" stamp="1781634100885" updateReferences="true"/>
+</session>

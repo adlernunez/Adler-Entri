@@ -1,0 +1,35 @@
+/*
+ * HCSR04_Driver.h
+ *
+ * Created on: Mar 22, 2026
+ * Author: ADLER
+ */
+
+#ifndef INC_HCSR04_DRIVER_H_
+#define INC_HCSR04_DRIVER_H_
+
+#include "stm32f401xx.h"
+#include "STM32F401XX_gpio_driver.h"
+
+// Hardware Pin Mappings (Port A)
+#define OUTPUT_PIN   0
+#define TRIGGER_PIN  1
+#define ECHO_PIN     4
+
+// Initialization Functions
+void SysTick_Delay_init();
+void GPIO_setup();
+void Timer2_Init();
+
+// Utility Functions
+void Delay_us(uint32_t time);
+void Send_Trigger();
+
+// Output Functions (Mapped to PA0)
+void Buzzer_ON();
+void Buzzer_OFF();
+
+// Core Sensor Function (The Missing Link!)
+uint32_t HCSR04_GetDistance();
+
+#endif /* INC_HCSR04_DRIVER_H_ */

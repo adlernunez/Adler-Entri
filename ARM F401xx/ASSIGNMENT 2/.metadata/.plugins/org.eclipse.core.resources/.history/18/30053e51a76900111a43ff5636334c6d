@@ -1,0 +1,54 @@
+#include <stdint.h>
+#include <stdio.h>
+#include "STM32F401XX_gpio_driver.h"
+#include "stm32f401re_usart_driver.h"
+
+// 1. Setup USART Pins (PA2 = TX, PA3 = RX)
+void usart2_GPIO_PinSetUp(void)
+{
+    GPIO_PeriClockControl(GPIOA, ENABLE);
+
+    GPIO_handle_t usart_pins = {0};
+    usart_pins.pGPIOx = GPIOA;
+    usart_pins.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_ALTFN;
+    usart_pins.GPIO_PinConfig.GPIO_PinAltFunction = 7;
+    usart_pins.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+    usart_pins.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_PULLUP;
+    usart_pins.GPIO_PinConfig.GPIO_PinOPType = GPIO_PUSHPULL;
+
+    usart_pins.GPIO_PinConfig.GPIO_PinNumber = 2; // PA2 (TX)
+    GPIO_Init(&usart_pins);
+
+    usart_pins.GPIO_PinConfig.GPIO_PinNumber = 3; // PA3 (RX)
+    GPIO_Init(&usart_pins);
+}
+
+int main(void)
+{
+    // Initialize USART2
+    usart2_GPIO_PinSetUp();
+
+    USART_Handle_t usart2 = {0};
+    usart2.pUSARTx =                        USART2;
+    usart2.USART_Config.USART_Baud =        USART_STD_BAUD_9600;
+    usart2.USART_Config.USART_Mode =        USART_MODE_RXTX;
+    usart2.USART_Config.USART_Parity =      USART_NO_PARITY;
+    usart2.USART_Config.USART_StopBit =     USART_STOP_BIT_1;
+    usart2.USART_Config.USART_WordLength =  USART_WORDLEN_8BITS;
+    usart2.USART_Config.USART_HWflowControl = USART_NO_CTS_RTS;
+    usart2.USART_Config.USART_OverSampling = USART_OVERSAMPLING_16;
+
+    USART_Init(&usart2);
+    USART_PeripheralControl(USART2, ENABLE);
+
+    // Loop forever printing a test message
+    while(1)
+    {
+        USART_Transmit_String(USART2, "Hello from STM32! USART is working!\r\n");
+
+        // A "dumb" delay loop so we don't flood the terminal
+        for(volatile uint32_t i = 0; i < 500000; i++);
+    }
+
+    return 0;
+}

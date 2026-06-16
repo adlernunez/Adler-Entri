@@ -1,0 +1,46 @@
+#include <stdint.h>
+#include <stdio.h>
+#include "STM32F401REXX_gpio_driver.h"
+#include "stm32f401re_usart_driver.h"
+#include "HCSR04_Driver.h"
+
+int main(void)
+{
+	usart2_GPIO_PinSetUp();                         /* SET PA2 AND PA3 AS TX & RX of USART2*/
+
+	USART_Handle_t usart2;
+	usart2.pUSARTx=                         USART2;             /* SELECTT USART CONFIGURATIONS */
+	usart2.USART_Config.USART_Baud=         USART_STD_BAUD_9600;
+	usart2.USART_Config.USART_Mode=         USART_MODE_RXTX ;
+	usart2.USART_Config.USART_Parity=       USART_NO_PARITY ;
+	usart2.USART_Config.USART_StopBit=      USART_STOP_BIT_1;
+	usart2.USART_Config.USART_WordLength=   USART_WORDLEN_8BITS;
+
+	USART_Init(&usart2);                            /* INITIALISE USART WITH CONFIGURATIONS       */
+	USART_PeripheralControl(USART2, ENABLE);        /* ENABLE USART                               */
+
+	SysTick_Delay_init();                           /* INITIALISE SYSTICK FOR MICRO-SECONDS DELAY */
+	HCSR04_GPIO_setup();                            /* INITIALISE GPIO SETUP FOR SENSOR PINS      */
+	Timer2_Init();                                  /* INITIALISE TIMER2 FOR MEASUTING ECHO TIME  */
+
+	int distance;
+	char string[40];
+	while(1)
+	{
+		distance = HCSR04_GetDistance();            /* MEASURE DISTANCE                            */
+
+		if(distance<10)
+		{                                           /* TURN ON BUZZER IF DISTANCE IS LESS THAN 10CM*/
+			Buzzer_ON();
+		}
+		else
+		{
+			Buzzer_OFF();
+		}
+		sprintf(string, "Distance : %02d cm",distance); /* SEND AS STRING */
+		USART_Transmit_String(USART2, string);
+                                                   /* PRINT DISTANCE ON SERIAL MONITOR VIA USART   */
+		USART_Transmit(USART2,'\n');
+		Delay_us(50000);
+	}
+}

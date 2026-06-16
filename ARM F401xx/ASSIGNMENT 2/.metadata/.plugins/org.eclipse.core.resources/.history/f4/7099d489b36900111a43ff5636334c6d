@@ -1,0 +1,101 @@
+#include "dht11_driver.h"
+
+// Helper function for reliable millisecond delays using SysTick
+static void DHT11_Delay_ms(uint32_t ms) {
+    for(uint32_t i = 0; i < ms; i++) {
+        for(uint32_t us = 0; us < 1000; us++) {
+            while(!(SYSTICK->CTRL & (1<<16)));
+        }
+    }
+}
+
+void DHT11_Init(void) {
+    // Setup SysTick inline for 1 microsecond ticks (16MHz clock)
+    SYSTICK->LOAD = 15;
+    SYSTICK->VAL = 0;
+    SYSTICK->CTRL |= (1<<0) | (1<<2); // Set ENABLE and CLKSOURCE bits
+
+    // Enable clock for GPIOA
+    GPIO_PeriClockControl(GPIOA, ENABLE);
+}
+
+uint8_t DHT11_Read(DHT11_Data_t *SensorData) {
+    uint8_t data[5] = {0, 0, 0, 0, 0};
+    uint16_t timeout = 0;
+
+    // Base GPIO configuration for PA0
+    GPIO_handle_t dht_pin = {0};
+    dht_pin.pGPIOx = GPIOA;
+    dht_pin.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_0; // Moved to PA0
+    dht_pin.GPIO_PinConfig.GPIO_PinOPType = GPIO_PUSHPULL;
+    dht_pin.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+    dht_pin.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_PULLUP;
+
+    // --- START SIGNAL ---
+    // Set PA0 to Output
+    dht_pin.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
+    GPIO_Init(&dht_pin);
+
+    // Pull LOW for exactly 18ms to wake up sensor
+    GPIO_WriteToOutputPin(GPIOA, 0, GPIO_PIN_RESET);
+    for(uint32_t i = 0; i < 18000; i++) {
+        while(!(SYSTICK->CTRL & (1<<16))); // 1us delay per tick
+    }
+
+    // Set HIGH and switch to Input mode to listen
+    GPIO_WriteToOutputPin(GPIOA, 0, GPIO_PIN_SET);
+    dht_pin.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_IN;
+    GPIO_Init(&dht_pin);
+
+    // --- WAIT FOR SENSOR RESPONSE ---
+    timeout = 0;
+    while(GPIO_READFromInputPin(GPIOA, 0) == 1) { // Wait for pull LOW
+        if(++timeout > 5000) return DHT11_ERROR_TIMEOUT;
+    }
+
+    timeout = 0;
+    while(GPIO_READFromInputPin(GPIOA, 0) == 0) { // Wait for pull HIGH
+        if(++timeout > 5000) return DHT11_ERROR_TIMEOUT;
+    }
+
+    timeout = 0;
+    while(GPIO_READFromInputPin(GPIOA, 0) == 1) { // Wait for pull LOW again
+        if(++timeout > 5000) return DHT11_ERROR_TIMEOUT;
+    }
+
+    // --- READ 40 BITS ---
+    for(int i = 0; i < 5; i++) {
+        for(int j = 0; j < 8; j++) {
+
+            // Measure LOW duration
+            uint32_t time_low = 0;
+            while(GPIO_READFromInputPin(GPIOA, 0) == 0) {
+                if(++time_low > 20000) return DHT11_ERROR_TIMEOUT;
+            }
+
+            // Measure HIGH duration
+            uint32_t time_high = 0;
+            while(GPIO_READFromInputPin(GPIOA, 0) == 1) {
+                if(++time_high > 20000) return DHT11_ERROR_TIMEOUT;
+            }
+
+            // Write bit based on relative time
+            data[i] <<= 1;
+            if(time_high > time_low) {
+                data[i] |= 1;
+            }
+        }
+    }
+
+    // --- VERIFY CHECKSUM ---
+    uint8_t checksum = data[0] + data[1] + data[2] + data[3];
+    if(checksum == data[4]) {
+        SensorData->hum_int  = data[0];
+        SensorData->hum_dec  = data[1];
+        SensorData->temp_int = data[2];
+        SensorData->temp_dec = data[3];
+        return DHT11_OK;
+    }
+
+    return DHT11_ERROR_CHECKSUM;
+}
