@@ -38,8 +38,8 @@ The DHT11 uses a simplified 1-wire protocol where timing is critical:
 ### LED Feedback Logic
 - Threshold: Configured via `#define TEMP_THRESHOLD 35`.
 - Logic:
-  - `Temp >= 35°C`: Red LED (PA0) ON, Green LED (PA4) OFF.
-  - `Temp < 35°C`: Green LED (PA4) ON, Red LED (PA0) OFF.
+  - `Temp >= 35°C`: Green LED (PA4) ON, 
+  - `Temp < 35°C`: Green LED (PA4) OFF.
 
 ## Implementation Flow
 1. Initialize USART, SysTick, and GPIO pins.
@@ -70,7 +70,7 @@ Temp: 32.5 C
 - Improving code modularity by separating driver logic from application-level `main.c` code.
 
 ## 💻 Source Code
-(Place your repository link here)
+https://github.com/adlernunez/Adler-Entri/tree/master/ARM%20F401xx/ASSIGNMENT%202/driver
 
 ### Application Layer (main.c snippet)
 ```c
