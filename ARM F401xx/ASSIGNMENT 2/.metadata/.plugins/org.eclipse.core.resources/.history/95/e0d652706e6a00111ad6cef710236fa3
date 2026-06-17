@@ -1,0 +1,87 @@
+#include "OLED_driver.h"
+
+void OLED_WriteCommand(I2C_Handle_t *pI2CHandle, uint8_t command) {
+    uint8_t buffer[2] = {0x00, command}; // 0x00 indicates command mode for SSD1306
+    I2C_MasterSendData(pI2CHandle, buffer, 2, OLED_ADDRESS, 0);
+}
+
+void OLED_WriteData(I2C_Handle_t *pI2CHandle, uint8_t data) {
+    uint8_t buffer[2] = {0x40, data};    // 0x40 indicates data mode
+    I2C_MasterSendData(pI2CHandle, buffer, 2, OLED_ADDRESS, 0);
+}
+
+void OLED_DisplayString(I2C_Handle_t *pI2CHandle, char *str) {
+    while (*str) {
+        // This is a placeholder; you need to map characters to font bitmaps
+        OLED_WriteData(pI2CHandle, *str++);
+    }
+}
+
+void OLED_Init(I2C_Handle_t *pI2CHandle) {
+    // Full SSD1306 0.96" 128x64 init sequence.
+    // The previous version was missing the charge pump enable, which
+    // is why nothing appeared: without it the panel never gets driven
+    // with enough voltage to light any pixels, even though every I2C
+    // command/data write succeeds with no errors.
+
+    OLED_WriteCommand(pI2CHandle, 0xAE); // Display OFF (sleep mode)
+
+    OLED_WriteCommand(pI2CHandle, 0xD5); // Set display clock divide ratio/osc freq
+    OLED_WriteCommand(pI2CHandle, 0x80); // Default ratio
+
+    OLED_WriteCommand(pI2CHandle, 0xA8); // Set multiplex ratio
+    OLED_WriteCommand(pI2CHandle, 0x3F); // 1/64 duty (for 128x64 panel; use 0x1F for 128x32)
+
+    OLED_WriteCommand(pI2CHandle, 0xD3); // Set display offset
+    OLED_WriteCommand(pI2CHandle, 0x00); // No offset
+
+    OLED_WriteCommand(pI2CHandle, 0x40); // Set display start line = 0 (0x40 | 0)
+
+    OLED_WriteCommand(pI2CHandle, 0x8D); // Charge pump setting  <-- THE MISSING STEP
+    OLED_WriteCommand(pI2CHandle, 0x14); // Enable charge pump (0x10 = disabled, 0x14 = enabled)
+
+    OLED_WriteCommand(pI2CHandle, 0x20); // Memory addressing mode
+    OLED_WriteCommand(pI2CHandle, 0x00); // Horizontal addressing mode (easiest for full-screen writes)
+
+    OLED_WriteCommand(pI2CHandle, 0xA1); // Segment re-map (mirror horizontally); use 0xA0 if image is flipped
+    OLED_WriteCommand(pI2CHandle, 0xC8); // COM output scan direction (remap); use 0xC0 if image is upside down
+
+    OLED_WriteCommand(pI2CHandle, 0xDA); // Set COM pins hardware config
+    OLED_WriteCommand(pI2CHandle, 0x12); // Alternative COM config, disable left/right remap (standard for 128x64)
+
+    OLED_WriteCommand(pI2CHandle, 0x81); // Set contrast control
+    OLED_WriteCommand(pI2CHandle, 0xCF); // Contrast value (0x00-0xFF)
+
+    OLED_WriteCommand(pI2CHandle, 0xD9); // Set pre-charge period
+    OLED_WriteCommand(pI2CHandle, 0xF1); // Phase 1 = 1, Phase 2 = 15 (works well with internal charge pump)
+
+    OLED_WriteCommand(pI2CHandle, 0xDB); // Set VCOMH deselect level
+    OLED_WriteCommand(pI2CHandle, 0x40); // ~0.83 x VCC
+
+    OLED_WriteCommand(pI2CHandle, 0xA4); // Entire display ON (resume to RAM content, not all-white test mode)
+    OLED_WriteCommand(pI2CHandle, 0xA6); // Normal display (not inverted); use 0xA7 to invert
+
+    OLED_WriteCommand(pI2CHandle, 0xAF); // Display ON
+
+    // Make sure GDDRAM starts in a known state instead of garbage from
+    // power-on; OLED_Clear relies on horizontal addressing mode set above.
+    OLED_Clear(pI2CHandle);
+}
+
+void OLED_Clear(I2C_Handle_t *pI2CHandle) {
+    // Explicitly set the address window so the controller's write
+    // pointer is guaranteed to start at column 0 / page 0 before we
+    // blast zeros into it. In horizontal addressing mode this also
+    // makes the pointer auto-wrap correctly across all 8 pages.
+    OLED_WriteCommand(pI2CHandle, 0x21); // Set column address
+    OLED_WriteCommand(pI2CHandle, 0x00); // Start column = 0
+    OLED_WriteCommand(pI2CHandle, 0x7F); // End column = 127
+
+    OLED_WriteCommand(pI2CHandle, 0x22); // Set page address
+    OLED_WriteCommand(pI2CHandle, 0x00); // Start page = 0
+    OLED_WriteCommand(pI2CHandle, 0x07); // End page = 7 (8 pages x 8 px = 64 rows)
+
+    for (uint16_t i = 0; i < 1024; i++) { // 128 * 64 / 8 = 1024 bytes
+        OLED_WriteData(pI2CHandle, 0x00);
+    }
+}

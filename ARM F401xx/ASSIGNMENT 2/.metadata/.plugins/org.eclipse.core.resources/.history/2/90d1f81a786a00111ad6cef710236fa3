@@ -1,0 +1,26 @@
+#include "ssd1306.h"
+
+void SSD1306_WriteCommand(I2C_RegDef_t *I2C_Instance, uint8_t command) {
+    uint8_t buffer[2] = {0x00, command}; // 0x00 = Command mode
+    I2C_MasterSendData(I2C_Instance, buffer, 2, SSD1306_I2C_ADDR);
+}
+
+void SSD1306_Init(I2C_RegDef_t *I2C_Instance) {
+    // Standard initialization sequence for SSD1306
+    SSD1306_WriteCommand(I2C_Instance, 0xAE); // Display OFF
+    SSD1306_WriteCommand(I2C_Instance, 0xD5); // Set Display Clock Divide Ratio
+    SSD1306_WriteCommand(I2C_Instance, 0x80);
+    SSD1306_WriteCommand(I2C_Instance, 0xA8); // Set Multiplex Ratio
+    SSD1306_WriteCommand(I2C_Instance, 0x3F);
+    SSD1306_WriteCommand(I2C_Instance, 0x8D); // Enable Charge Pump
+    SSD1306_WriteCommand(I2C_Instance, 0x14);
+    SSD1306_WriteCommand(I2C_Instance, 0xAF); // Display ON
+    SSD1306_Clear(I2C_Instance);
+}
+
+void SSD1306_Clear(I2C_RegDef_t *I2C_Instance) {
+    for(uint16_t i = 0; i < 1024; i++) {
+        uint8_t buffer[2] = {0x40, 0x00}; // 0x40 = Data mode
+        I2C_MasterSendData(I2C_Instance, buffer, 2, SSD1306_I2C_ADDR);
+    }
+}

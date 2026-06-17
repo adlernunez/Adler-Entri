@@ -1,0 +1,62 @@
+#include <stdint.h>
+#include <stdio.h>
+#include "stm32f401re_usart_driver.h"
+#include "dht11_driver.h"
+#include "stm32f401re_i2c_driver.h"
+#include "ssd1306.h"
+
+#define TEMP_THRESHOLD 34
+
+int main(void)
+{
+    // 1. Initialize System Peripherals
+    usart2_GPIO_PinSetUp();
+
+    // USART2 Init
+    USART_Handle_t usart2 = {0};
+    usart2.pUSARTx = USART2;
+    usart2.USART_Config.USART_Baud = USART_STD_BAUD_9600;
+    usart2.USART_Config.USART_Mode = USART_MODE_RXTX;
+    USART_Init(&usart2);
+    USART_PeripheralControl(USART2, ENABLE);
+
+    // 2. I2C Setup for OLED (PB8, PB9)
+    I2C_Handle_t i2c1_handle = {0};
+    i2c1_handle.pI2Cx = I2C1;
+    i2c1_handle.I2C_Config.I2C_SCLSpeed = I2C_SCL_SPEED_SM;
+
+    // Initialize I2C pins via your GPIO driver (AF4, OpenDrain, Pullup)
+    // ... [Call GPIO_Init for PB8 and PB9 here] ...
+    I2C_Init(&i2c1_handle);
+    SSD1306_Init(I2C1);
+
+    // 3. DHT11 & LED Setup
+    DHT11_Init();
+    DHT11_Data_t mySensorData = {0};
+
+    // ... [Call GPIO_Init for PA5 Green LED] ...
+
+    char uart_buf[64];
+
+    while(1)
+    {
+        // Sample Delay
+        for(uint32_t i = 0; i < 2000000; i++);
+
+        // Read DHT11
+        if(DHT11_Read(&mySensorData) == DHT11_OK)
+        {
+            // LED Logic
+            if(mySensorData.temp_int >= TEMP_THRESHOLD)
+                GPIO_WriteToOutputPin(GPIOA, 5, GPIO_PIN_SET);
+            else
+                GPIO_WriteToOutputPin(GPIOA, 5, GPIO_PIN_RESET);
+
+            // Log to Serial
+            sprintf(uart_buf, "Temp: %d.%d C | Hum: %d.%d %%\r\n",
+                    mySensorData.temp_int, mySensorData.temp_dec,
+                    mySensorData.hum_int, mySensorData.hum_dec);
+            USART_Transmit_String(USART2, uart_buf);
+        }
+    }
+}

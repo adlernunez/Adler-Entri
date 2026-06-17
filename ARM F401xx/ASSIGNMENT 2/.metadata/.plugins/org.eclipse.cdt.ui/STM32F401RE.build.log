@@ -1,0 +1,11 @@
+00:16:09 **** Clean-only build of configuration Debug for project STM32F401RE ****
+make -j16 clean 
+rm -rf ./final\ project/3_I2c_display_temp_data.cyclo ./final\ project/3_I2c_display_temp_data.d ./final\ project/3_I2c_display_temp_data.o ./final\ project/3_I2c_display_temp_data.su
+rm -rf ./drivers/src/dht11_driver.cyclo ./drivers/src/dht11_driver.d ./drivers/src/dht11_driver.o ./drivers/src/dht11_driver.su ./drivers/src/fonts.cyclo ./drivers/src/fonts.d ./drivers/src/fonts.o ./drivers/src/fonts.su ./drivers/src/ssd1306.cyclo ./drivers/src/ssd1306.d ./drivers/src/ssd1306.o ./drivers/src/ssd1306.su ./drivers/src/stm32f446xx_gpio_driver.cyclo ./drivers/src/stm32f446xx_gpio_driver.d ./drivers/src/stm32f446xx_gpio_driver.o ./drivers/src/stm32f446xx_gpio_driver.su ./drivers/src/stm32f446xx_i2c_driver.cyclo ./drivers/src/stm32f446xx_i2c_driver.d ./drivers/src/stm32f446xx_i2c_driver.o ./drivers/src/stm32f446xx_i2c_driver.su ./drivers/src/stm32f446xx_rcc_driver.cyclo ./drivers/src/stm32f446xx_rcc_driver.d ./drivers/src/stm32f446xx_rcc_driver.o ./drivers/src/stm32f446xx_rcc_driver.su ./drivers/src/stm32f446xx_spi_driver.cyclo ./drivers/src/stm32f446xx_spi_driver.d ./drivers/src/stm32f446xx_spi_driver.o ./drivers/src/stm32f446xx_spi_driver.su ./drivers/src/stm32f446xx_usart_driver.cyclo ./drivers/src/stm32f446xx_usart_driver.d ./drivers/src/stm32f446xx_usart_driver.o ./drivers/src/stm32f446xx_usart_driver.su
+rm -rf ./Startup/startup_stm32f401retx.d ./Startup/startup_stm32f401retx.o
+rm -rf ./Src/main.cyclo ./Src/main.d ./Src/main.o ./Src/main.su ./Src/syscalls.cyclo ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.cyclo ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su
+rm -rf STM32F401RE.elf STM32F401RE.list STM32F401RE.map default.size.stdout
+ 
+
+00:16:10 Build Finished. 0 errors, 0 warnings. (took 480ms)
+

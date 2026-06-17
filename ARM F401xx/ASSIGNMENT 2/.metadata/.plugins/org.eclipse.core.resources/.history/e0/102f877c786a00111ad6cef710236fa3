@@ -1,0 +1,86 @@
+#include <stdint.h>
+#include <stdio.h>
+#include "stm32f401re_usart_driver.h"
+#include "dht11_driver.h"
+#include "stm32f401re_i2c_driver.h"
+#include "ssd1306.h"
+
+#define TEMP_THRESHOLD 34
+
+// Global Handles
+USART_Handle_t usart2 = {0};
+I2C_Handle_t i2c1_handle = {0};
+
+void GPIO_Manual_Init(void) {
+    GPIOA_CLK_EN();
+    GPIOB_CLK_EN();
+
+    usart2_GPIO_PinSetUp();
+
+    // Setup I2C Pins (PB8=SCL, PB9=SDA)
+    GPIO_handle_t i2c_pins = {0};
+    i2c_pins.pGPIOx = GPIOB;
+    i2c_pins.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_ALTFN;
+    i2c_pins.GPIO_PinConfig.GPIO_PinAltFunction = AF4;
+    i2c_pins.GPIO_PinConfig.GPIO_PinOPType = GPIO_OPENDRAIN;
+    i2c_pins.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_PULLUP;
+    i2c_pins.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+
+    i2c_pins.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_8;
+    GPIO_Init(&i2c_pins);
+
+    i2c_pins.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_9;
+    GPIO_Init(&i2c_pins);
+}
+
+int main(void)
+{
+    GPIO_Manual_Init();
+
+    // 1. USART Init
+    usart2.pUSARTx = USART2;
+    usart2.USART_Config.USART_Baud = USART_STD_BAUD_9600;
+    usart2.USART_Config.USART_Mode = USART_MODE_TX_ONLY;
+    USART_Init(&usart2);
+    USART_PeripheralControl(USART2, ENABLE);
+
+    USART_Transmit_String(USART2, "\r\n=== SYSTEM BOOT ===\r\n");
+
+    // 2. I2C Init
+    i2c1_handle.pI2Cx = I2C1;
+    i2c1_handle.I2C_Config.I2C_SCLSpeed = I2C_SCL_SPEED_SM;
+    i2c1_handle.I2C_Config.I2C_AckControl = I2C_ACK_ENABLE;
+    I2C_Init(&i2c1_handle);
+
+    // 3. OLED Init
+    USART_Transmit_String(USART2, "Waking up OLED...\r\n");
+    SSD1306_Init(&i2c1_handle);
+    USART_Transmit_String(USART2, "OLED Ready.\r\n");
+
+    // 4. DHT11 Init
+    DHT11_Init();
+    DHT11_Data_t sensorData = {0};
+
+    while(1)
+    {
+        for(uint32_t i = 0; i < 2000000; i++); // ~2 sec delay
+
+        if(DHT11_Read(&sensorData) == DHT11_OK)
+        {
+            char msg[50];
+            sprintf(msg, "Temp: %dC Hum: %d%%\r\n", sensorData.temp_int, sensorData.hum_int);
+            USART_Transmit_String(USART2, msg);
+
+            // Visual Output: Screen turns entirely white if hot, black if cool
+            if(sensorData.temp_int >= TEMP_THRESHOLD) {
+                SSD1306_Fill(&i2c1_handle, 0xFF); // All pixels ON
+            } else {
+                SSD1306_Fill(&i2c1_handle, 0x00); // All pixels OFF
+            }
+        }
+        else
+        {
+            USART_Transmit_String(USART2, "Sensor Error!\r\n");
+        }
+    }
+}

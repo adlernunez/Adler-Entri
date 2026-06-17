@@ -1,0 +1,29 @@
+#include "fonts.h" // Include your new font dictionary
+
+// Set the (X, Y) starting position.
+// Column goes from 0 to 127. Page (row) goes from 0 to 7.
+void SSD1306_SetCursor(I2C_Handle_t *hi2c, uint8_t column, uint8_t page) {
+    SSD1306_WriteCommand(hi2c, 0xB0 + page);                     // Set Page (row)
+    SSD1306_WriteCommand(hi2c, 0x00 | (column & 0x0F));          // Set lower column address
+    SSD1306_WriteCommand(hi2c, 0x10 | ((column >> 4) & 0x0F));   // Set higher column address
+}
+
+// Print a single character
+void SSD1306_WriteChar(I2C_Handle_t *hi2c, char ch) {
+    // Check if character is valid ASCII
+    if(ch < 32 || ch > 126) return;
+
+    // Look up the character in our dictionary and draw its 5 columns
+    for(uint8_t i = 0; i < 5; i++) {
+        SSD1306_WriteData(hi2c, Font5x7[ch - 32][i]);
+    }
+    // Add 1 blank column of space between characters so they don't touch
+    SSD1306_WriteData(hi2c, 0x00);
+}
+
+// Loop through a string and print each character
+void SSD1306_WriteString(I2C_Handle_t *hi2c, char *str) {
+    while(*str) {
+        SSD1306_WriteChar(hi2c, *str++);
+    }
+}

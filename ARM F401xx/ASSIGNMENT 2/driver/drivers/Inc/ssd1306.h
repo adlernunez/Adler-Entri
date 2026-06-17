@@ -1,0 +1,16 @@
+#ifndef SSD1306_H
+#define SSD1306_H
+
+#include "stm32f401re_i2c_driver.h"
+
+#define SSD1306_I2C_ADDR 0x3C
+
+void SSD1306_Init(I2C_Handle_t *hi2c);
+void SSD1306_Fill(I2C_Handle_t *hi2c, uint8_t color);
+
+// --- NEW TEXT FUNCTIONS ---
+void SSD1306_SetCursor(I2C_Handle_t *hi2c, uint8_t column, uint8_t page);
+void SSD1306_WriteChar(I2C_Handle_t *hi2c, char ch);
+void SSD1306_WriteString(I2C_Handle_t *hi2c, char *str);
+
+#endif
