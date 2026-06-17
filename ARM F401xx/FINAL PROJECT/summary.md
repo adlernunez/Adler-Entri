@@ -1,7 +1,7 @@
 # STM32 Bare-Metal Driver Development Portfolio
-**Platform:** STM32 Nucleo (F401RE / F446RE)  
+**Platform:** STM32 Nucleo  
 **Architecture:** ARM Cortex-M4  
-**Framework:** Bare-Metal C (No HAL/LL Libraries)
+**Framework:** Bare-Metal C 
 
 ## Executive Summary
 This portfolio showcases a complete, ground-up implementation of essential embedded communication protocols and hardware abstraction layers. By bypassing standard manufacturer libraries (like STM32 HAL), these projects demonstrate a deep understanding of microcontroller memory maps, bus matrices, clock configurations, and register-level hardware manipulation. 
