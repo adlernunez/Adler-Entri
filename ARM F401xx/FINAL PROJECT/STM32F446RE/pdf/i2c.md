@@ -45,7 +45,7 @@ Successful rendering of live temperature and humidity data on the OLED screen, w
 * Hiding complex communication sequences (Start -> Address -> Data -> Stop) inside a single, robust `I2C_MasterSendData` API.
 * Understanding the necessity of timeouts in embedded drivers when dealing with physical external wires.
 
-💻 **Source Code:** [GitHub Repository Link](https://github.com/adlernunez/Adler-Entri/tree/master/ARM%20F401xx/ASSIGNMENT%202/driver)
+💻 **Source Code:** https://github.com/adlernunez/Adler-Entri/tree/master/ARM%20F401xx/FINAL%20PROJECT/STM32F446RE
 
 ## Application Layer (main.c snippet)
 ```c
@@ -76,4 +76,4 @@ int main(void) {
         delay_ms(2000);
     }
 }
-DEMO:
+DEMO: https://drive.google.com/drive/folders/1eXq7sDkj5dFtnOcIj5tX9Nme-Wcqtehi?usp=sharing

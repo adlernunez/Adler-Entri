@@ -43,7 +43,7 @@ A highly reliable, synchronous data bridge allowing the STM32 to offload the env
 * Understanding the physical mechanics of synchronous Shift Registers.
 * Hiding the complexity of `TXE`, `RXNE`, and `BSY` flag polling inside a unified Transmission API.
 
-💻 **Source Code:** [GitHub Repository Link](https://github.com/adlernunez/Adler-Entri/tree/master/ARM%20F401xx/ASSIGNMENT%202/driver)
+💻 **Source Code:** https://github.com/adlernunez/Adler-Entri/tree/master/ARM%20F401xx/FINAL%20PROJECT/STM32F446RE
 
 ## Application Layer (main.c snippet)
 ```c
@@ -79,3 +79,4 @@ int main(void) {
         delay_ms(2000);
     }
 }
+DEMO: https://drive.google.com/drive/folders/1eXq7sDkj5dFtnOcIj5tX9Nme-Wcqtehi?usp=sharing

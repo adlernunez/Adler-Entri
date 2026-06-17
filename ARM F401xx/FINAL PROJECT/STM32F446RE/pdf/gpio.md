@@ -1,5 +1,4 @@
-# GPIO Driver & Environmental Sensing System
-
+# GPIO Driver 
 ## Overview
 This project implements a bare-metal General Purpose Input/Output (GPIO) driver to control physical pins on the STM32. It serves as the foundation for the entire system, managing bidirectional 1-wire communication for a DHT11 sensor and controlling an onboard LED for physical thermal alerts.
 
@@ -41,7 +40,7 @@ Successfully achieved stable, repeatable environmental readings with an immediat
 * Mastering GPIO memory offsets and register masking without high-level HAL libraries.
 * Understanding the critical difference between Push-Pull and Open-Drain outputs when dealing with external sensors.
 
-💻 **Source Code:** [GitHub Repository Link](https://github.com/adlernunez/Adler-Entri/tree/master/ARM%20F401xx/ASSIGNMENT%202/driver)
+💻 **Source Code:** https://github.com/adlernunez/Adler-Entri/tree/master/ARM%20F401xx/FINAL%20PROJECT/STM32F446RE
 
 ## Application Layer (main.c snippet)
 ```c
@@ -76,4 +75,4 @@ int main(void) {
     }
 }
 
-DEMO:
+DEMO:https://drive.google.com/drive/folders/1eXq7sDkj5dFtnOcIj5tX9Nme-Wcqtehi?usp=sharing

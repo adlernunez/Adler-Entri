@@ -45,7 +45,7 @@ A highly stable serial connection outputting continuous, easily readable environ
 * Understanding how fractional baud rate generation translates to physical register configurations.
 * Hiding the complexity of `TXE` and `TC` flag polling inside a clean `Transmit_String` API.
 
-💻 **Source Code:** [GitHub Repository Link](https://github.com/adlernunez/Adler-Entri/tree/master/ARM%20F401xx/ASSIGNMENT%202/driver)
+💻 **Source Code:** https://github.com/adlernunez/Adler-Entri/tree/master/ARM%20F401xx/FINAL%20PROJECT/STM32F446RE
 
 ## Application Layer (main.c snippet)
 ```c
@@ -75,4 +75,4 @@ int main(void) {
     }
 }
 
-DEMO:
+DEMO:https://drive.google.com/drive/folders/1eXq7sDkj5dFtnOcIj5tX9Nme-Wcqtehi?usp=sharing
