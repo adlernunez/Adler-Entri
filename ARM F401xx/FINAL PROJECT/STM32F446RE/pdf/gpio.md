@@ -1,56 +1,61 @@
-# GPIO Driver 
+# GPIO Driver: Simple LED Reflex Game
+
 ## Overview
-This project implements a bare-metal General Purpose Input/Output (GPIO) driver to control physical pins on the STM32. It serves as the foundation for the entire system, managing bidirectional 1-wire communication for a DHT11 sensor and controlling an onboard LED for physical thermal alerts.
+This project implements a bare-metal General Purpose Input/Output (GPIO) driver to create a simple interactive LED reflex game on the STM32. It serves as the foundation for physical hardware interaction, managing standard Push-Pull outputs for visual feedback and Input polling for player actions.
 
 ## Objectives
 * Develop a custom GPIO driver to abstract AHB1 bus memory mapping and register manipulation.
-* Configure pins dynamically for INPUT, OUTPUT, and Alternate Functions (AF).
-* Implement SysTick timers for precise microsecond-level pulse measurement.
-* Provide visual feedback using LED indicators based on thermal thresholds.
+* Configure pins dynamically for INPUT (Push Button) and OUTPUT (LED).
+* Implement software debouncing to ensure clean and accurate button presses.
+* Build a basic state machine to handle game logic and adjust difficulty dynamically.
 
 ## Components Used
 * STM32 Nucleo Board (STM32F401RE / F446RE)
-* DHT11 Temperature & Humidity Sensor
-* Internal LED (PA5)
+* Internal Green LED (PA5)
+* Internal User Button (PC13)
 * STM32CubeIDE
 
 ## Working Principle
-The GPIO driver directly writes to the `MODER`, `OTYPER`, `OSPEEDR`, and `PUPDR` registers. For the DHT11, the protocol requires switching a single data pin between output (to send an 18ms wake-up pulse) and input (to measure the 40-bit response). Each data bit is identified by comparing the microsecond duration of HIGH vs. LOW logic states.
+The GPIO driver directly writes to and reads from the `MODER`, `OTYPER`, `OSPEEDR`, `PUPDR`, `ODR`, and `IDR` registers. The game relies on a continuous polling loop: the onboard LED blinks at a specific interval. The player must press the user button exactly when the LED is ON. The driver reads the `IDR` (Input Data Register) of Port C to detect the button press, and evaluates the `ODR` (Output Data Register) of Port A to determine if the player won or lost the round.
 
 ## System Architecture
 * **GPIO Driver:** Hides bitwise shifting complexity through a `GPIO_Handle_t` struct.
-* **1-Wire Protocol Logic:** Uses SysTick polling to capture strict timing edges.
-* **LED Feedback Logic:** Temp >= 34°C triggers PA5 HIGH; Temp < 34°C triggers PA5 LOW.
+* **Input Polling Logic:** Continuously monitors the user button state (active LOW on Nucleo boards).
+* **Game Logic:**
+  * **Win:** Pressing the button while the LED is ON increases the game speed (decreasing the blink delay).
+  * **Loss:** Pressing the button while the LED is OFF resets the game to the slowest speed.
 
 ## Implementation Flow
-1. Initialize the GPIO clocks via RCC registers.
+1. Initialize the GPIO clocks for Port A and Port C via RCC registers.
 2. Configure PA5 as a Push-Pull output for the LED.
-3. Send the 18ms Start Signal to the DHT11, then instantly swap the pin mode to Input.
-4. Calculate temperature bits based on high/low pulse width ratios.
-5. Toggle the LED based on the decoded integer temperature value.
+3. Configure PC13 as an Input for the User Button.
+4. Enter the infinite `while(1)` game loop to toggle the LED.
+5. Poll the button state, apply a short delay for debouncing, and evaluate the win/loss condition.
 
 ## Key Observations
-* **Timing Sensitivity:** 1-wire protocol requires exact microsecond execution. Compiler optimizations were managed by using the `volatile` keyword for time-critical polling loops.
-* **Pin Abstraction:** The custom driver successfully hid the complex bit-masking required to swap pin directions on the fly.
+* **Mechanical Bounce:** Physical buttons generate noisy signals when pressed. Adding a small software delay (e.g., 50ms) after detecting the initial press was critical to prevent the microcontroller from registering multiple false inputs.
+* **Pin Abstraction:** The custom driver successfully hid the complex bit-masking required to read specific input pins and toggle output pins cleanly.
 
 ## Results
-Successfully achieved stable, repeatable environmental readings with an immediate physical LED alert when the temperature threshold is breached.
+Successfully achieved a stable, playable reflex game that responds instantly to user input and dynamically scales in difficulty.
 
 ## Key Learnings
-* Mastering GPIO memory offsets and register masking without high-level HAL libraries.
-* Understanding the critical difference between Push-Pull and Open-Drain outputs when dealing with external sensors.
+* Mastering GPIO memory offsets and register masking for both Input and Output configurations without high-level HAL libraries.
+* Understanding the necessity of software debouncing when interfacing with mechanical switches.
 
 💻 **Source Code:** https://github.com/adlernunez/Adler-Entri/tree/master/ARM%20F401xx/FINAL%20PROJECT/STM32F446RE
 
 ## Application Layer (main.c snippet)
 ```c
 #include "stm32f401re_gpio_driver.h"
-#include "dht11_driver.h"
 
-#define TEMP_THRESHOLD 34
+// Crude delay function for game pacing and debouncing
+void delay_ms(uint32_t ms) {
+    for(uint32_t i = 0; i < ms * 4000; i++);
+}
 
 int main(void) {
-    // Initialize the Onboard Green LED (PA5)
+    // 1. Initialize the Onboard Green LED (PA5)
     GPIO_handle_t led_green = {0};
     led_green.pGPIOx = GPIOA;
     led_green.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_5;
@@ -60,19 +65,48 @@ int main(void) {
     led_green.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPD;
     GPIO_Init(&led_green);
 
-    DHT11_Init();
-    DHT11_Data_t mySensorData = {0};
+    // 2. Initialize the Onboard User Button (PC13)
+    GPIO_handle_t user_btn = {0};
+    user_btn.pGPIOx = GPIOC;
+    user_btn.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_13;
+    user_btn.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_IN;
+    user_btn.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+    user_btn.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_NO_PUPD; // Nucleo board has external pull-up
+    GPIO_Init(&user_btn);
+
+    uint32_t game_speed = 500; // Initial LED toggle delay (ms)
 
     while(1) {
-        delay_ms(2000); // 2-second sensor recovery delay
-        if(DHT11_Read(&mySensorData) == DHT11_OK) {
-            if(mySensorData.temp_int >= TEMP_THRESHOLD) {
-                GPIO_WriteToOutputPin(GPIOA, 5, GPIO_PIN_SET);
-            } else {
-                GPIO_WriteToOutputPin(GPIOA, 5, GPIO_PIN_RESET);
+        // Toggle the LED
+        GPIO_ToggleOutputPin(GPIOA, GPIO_PIN_NO_5);
+        delay_ms(game_speed);
+
+        // Read Button State (Nucleo PC13 is Active LOW)
+        if(GPIO_ReadFromInputPin(GPIOC, GPIO_PIN_NO_13) == 0) {
+
+            delay_ms(50); // Software Debounce
+
+            // Confirm button is still pressed
+            if(GPIO_ReadFromInputPin(GPIOC, GPIO_PIN_NO_13) == 0) {
+
+                // Read current state of LED to check win condition
+                uint8_t led_state = GPIO_ReadFromInputPin(GPIOA, GPIO_PIN_NO_5);
+
+                if(led_state == 1) {
+                    // WIN: LED was ON. Speed up the game!
+                    if(game_speed > 100) game_speed -= 50;
+                } else {
+                    // LOSE: LED was OFF. Reset speed.
+                    game_speed = 500;
+                }
+
+                // Wait for player to release the button before continuing
+                while(GPIO_ReadFromInputPin(GPIOC, GPIO_PIN_NO_13) == 0);
+                delay_ms(50); // Debounce release
             }
         }
     }
 }
+```
 
-DEMO:https://drive.google.com/drive/folders/1eXq7sDkj5dFtnOcIj5tX9Nme-Wcqtehi?usp=sharing
+DEMO: https://drive.google.com/drive/folders/1eXq7sDkj5dFtnOcIj5tX9Nme-Wcqtehi?usp=sharing
