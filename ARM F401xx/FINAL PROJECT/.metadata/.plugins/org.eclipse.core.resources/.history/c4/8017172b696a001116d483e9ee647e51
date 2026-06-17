@@ -1,0 +1,6 @@
+final project/3_I2c_display_temp_data.o: \
+ ../final\ project/3_I2c_display_temp_data.c \
+ D:/Projects/ARM\ F401xx/FINAL\ PROJECT/STM32F401RE/drivers/inc/stm32f446xx_i2c_driver.h \
+ D:/Projects/ARM\ F401xx/FINAL\ PROJECT/STM32F401RE/drivers/inc/stm32f446xx.h
+D:/Projects/ARM\ F401xx/FINAL\ PROJECT/STM32F401RE/drivers/inc/stm32f446xx_i2c_driver.h:
+D:/Projects/ARM\ F401xx/FINAL\ PROJECT/STM32F401RE/drivers/inc/stm32f446xx.h:

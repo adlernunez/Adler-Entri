@@ -1,0 +1,5 @@
+../drivers/src/OLED_driver.c:3:6:OLED_WriteCommand	32	static
+../drivers/src/OLED_driver.c:8:6:OLED_DisplayString	16	static
+../drivers/src/OLED_driver.c:15:6:OLED_WriteData	32	static
+../drivers/src/OLED_driver.c:20:6:OLED_Init	16	static
+../drivers/src/OLED_driver.c:28:6:OLED_Clear	24	static

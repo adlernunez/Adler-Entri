@@ -1,0 +1,45 @@
+#include "dht11_driver.h"
+
+// Reusing your provided SysTick initialization
+void DHT11_Init(void) {
+    SYSTICK->LOAD = 15;
+    SYSTICK->VAL = 0;
+    SYSTICK->CTRL |= (1<<0) | (1<<2);
+
+    GPIO_PeriClockControl(GPIOA, ENABLE);
+}
+
+uint8_t DHT11_Read(DHT11_Data_t *SensorData) {
+    uint8_t data[5] = {0, 0, 0, 0, 0};
+    uint16_t timeout = 0;
+
+    GPIO_handle_t dht_pin = {0};
+    dht_pin.pGPIOx = GPIOA;
+    dht_pin.GPIO_PinConfig.GPIO_PinNumber = 1; // PA1
+    dht_pin.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+    dht_pin.GPIO_PinConfig.GPIO_PinOPType = GPIO_PUSHPULL;
+    dht_pin.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_PULLUP;
+
+    // --- START SIGNAL (Output) ---
+    dht_pin.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
+    GPIO_Init(&dht_pin);
+
+    GPIO_WriteToOutputPin(GPIOA, 1, 0); // Reset
+    // Using your driver's timing logic
+    for(uint32_t i = 0; i < 18000; i++) { while(!(SYSTICK->CTRL & (1<<16))); }
+
+    GPIO_WriteToOutputPin(GPIOA, 1, 1); // Set
+
+    // --- LISTEN (Input) ---
+    dht_pin.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_IN;
+    GPIO_Init(&dht_pin);
+
+    // Using your driver's API: GPIO_ReadFromInputPin
+    timeout = 0;
+    while(GPIO_ReadFromInputPin(GPIOA, 1) == 1) { if(++timeout > 5000) return DHT11_ERROR_TIMEOUT; }
+
+    // ... (Continue using GPIO_ReadFromInputPin for all wait loops) ...
+    // Verify your driver file for the exact function name (usually GPIO_ReadFromInputPin)
+
+    return DHT11_OK;
+}

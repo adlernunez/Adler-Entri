@@ -1,0 +1,6 @@
+drivers/src/stm32f446xx_spi_driver.o: \
+ ../drivers/src/stm32f446xx_spi_driver.c \
+ D:/Projects/ARM\ F401xx/FINAL\ PROJECT/STM32F401RE/drivers/inc/stm32f446xx_spi_driver.h \
+ D:/Projects/ARM\ F401xx/FINAL\ PROJECT/STM32F401RE/drivers/inc/stm32f446xx.h
+D:/Projects/ARM\ F401xx/FINAL\ PROJECT/STM32F401RE/drivers/inc/stm32f446xx_spi_driver.h:
+D:/Projects/ARM\ F401xx/FINAL\ PROJECT/STM32F401RE/drivers/inc/stm32f446xx.h:

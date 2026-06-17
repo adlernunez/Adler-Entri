@@ -1,0 +1,26 @@
+#ifndef INC_HCSR04_DRIVER_H_
+#define INC_HCSR04_DRIVER_H_
+
+#include "stm32f401xx.h"
+#include "STM32F401XX_gpio_driver.h"
+
+// Define Pins based on the Port A mappings
+#define OUTPUT_PIN   0   // PA0 for Buzzer/LED
+#define TRIGGER_PIN  1   // PA1 for HCSR04 Trigger
+#define ECHO_PIN     4   // PA4 for HCSR04 Echo
+
+// Initialization and Configuration
+void SysTick_Delay_init(void);
+void Timer2_Init(void);
+void GPIO_setup(void);
+
+// Operational Functions
+void Delay_us(uint32_t time);
+void Send_Trigger(void);
+uint32_t HCSR04_GetDistance(void);
+
+// Helpers
+void Buzzer_ON(void);
+void Buzzer_OFF(void);
+
+#endif /* INC_HCSR04_DRIVER_H_ */

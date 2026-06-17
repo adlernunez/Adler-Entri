@@ -1,0 +1,2 @@
+../drivers/src/dht11_driver.c:13:6:DHT11_Init	8	static
+../drivers/src/dht11_driver.c:21:9:DHT11_Read	64	static

@@ -1,0 +1,60 @@
+#include "dht11_driver.h"
+
+void DHT11_Init(void) {
+    SysTick->LOAD = 15;
+    SysTick->VAL = 0;
+    SysTick->CTRL |= (1<<0) | (1<<2);
+
+    GPIO_PeriClockControl(GPIOA, ENABLE);
+}
+
+uint8_t DHT11_Read(DHT11_Data_t *SensorData) {
+    uint8_t data[5] = {0};
+    uint16_t timeout = 0;
+
+    GPIO_Handle_t dht_pin = {0};
+    dht_pin.pGPIOx = GPIOA;
+    dht_pin.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_1;
+    dht_pin.GPIO_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_PP;
+    dht_pin.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+    dht_pin.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_PIN_PU;
+
+    dht_pin.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
+    GPIO_Init(&dht_pin);
+
+    GPIO_WriteToOutputPin(GPIOA, GPIO_PIN_NO_1, GPIO_PIN_RESET);
+    for(uint32_t i = 0; i < 18000; i++) {
+        while(!(SysTick->CTRL & (1<<16)));
+    }
+
+    GPIO_WriteToOutputPin(GPIOA, GPIO_PIN_NO_1, GPIO_PIN_SET);
+    dht_pin.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_IN;
+    GPIO_Init(&dht_pin);
+
+    timeout = 0;
+    while(GPIO_ReadFromInputPin(GPIOA, GPIO_PIN_NO_1) == 1) {
+        if(++timeout > 5000) return DHT11_ERROR_TIMEOUT;
+    }
+
+    for(int i = 0; i < 5; i++) {
+        for(int j = 0; j < 8; j++) {
+            uint32_t time_low = 0;
+            while(GPIO_ReadFromInputPin(GPIOA, GPIO_PIN_NO_1) == 0) {
+                if(++time_low > 20000) return DHT11_ERROR_TIMEOUT;
+            }
+            uint32_t time_high = 0;
+            while(GPIO_ReadFromInputPin(GPIOA, GPIO_PIN_NO_1) == 1) {
+                if(++time_high > 20000) return DHT11_ERROR_TIMEOUT;
+            }
+            data[i] <<= 1;
+            if(time_high > time_low) data[i] |= 1;
+        }
+    }
+
+    if((uint8_t)(data[0] + data[1] + data[2] + data[3]) == data[4]) {
+        SensorData->hum_int  = data[0];
+        SensorData->temp_int = data[2];
+        return DHT11_OK;
+    }
+    return DHT11_ERROR_CHECKSUM;
+}

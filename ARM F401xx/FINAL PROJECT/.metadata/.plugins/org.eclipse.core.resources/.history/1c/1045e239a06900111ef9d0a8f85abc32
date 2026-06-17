@@ -1,0 +1,73 @@
+#include <stdint.h>
+#include <stdio.h>
+#include "STM32F401XX_gpio_driver.h"
+#include "stm32f401re_usart_driver.h"
+#include "HCSR04_DRIVER.h"
+
+// 1. Added the missing implementation for your USART2 pins here
+void usart2_GPIO_PinSetUp(void)
+{
+    GPIO_PeriClockControl(GPIOA, ENABLE);
+
+    GPIO_handle_t usart_pins = {0};
+    usart_pins.pGPIOx = GPIOA;
+    usart_pins.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_ALTFN;
+    usart_pins.GPIO_PinConfig.GPIO_PinAltFunction = 7;
+    usart_pins.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+    usart_pins.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_PULLUP;
+    usart_pins.GPIO_PinConfig.GPIO_PinOPType = GPIO_PUSHPULL;
+
+    usart_pins.GPIO_PinConfig.GPIO_PinNumber = 2; // PA2 (TX)
+    GPIO_Init(&usart_pins);
+
+    usart_pins.GPIO_PinConfig.GPIO_PinNumber = 3; // PA3 (RX)
+    GPIO_Init(&usart_pins);
+}
+
+int main(void)
+{
+    usart2_GPIO_PinSetUp();                         /* SET PA2 AND PA3 AS TX & RX of USART2*/
+
+    USART_Handle_t usart2 = {0};
+    usart2.pUSARTx=                         USART2;             /* SELECT USART CONFIGURATIONS */
+    usart2.USART_Config.USART_Baud=         USART_STD_BAUD_9600;
+    usart2.USART_Config.USART_Mode=         USART_MODE_RXTX ;
+    usart2.USART_Config.USART_Parity=       USART_NO_PARITY ;
+    usart2.USART_Config.USART_StopBit=      USART_STOP_BIT_1;
+    usart2.USART_Config.USART_WordLength=   USART_WORDLEN_8BITS;
+    usart2.USART_Config.USART_HWflowControl = USART_NO_CTS_RTS;   // Added missing config
+    usart2.USART_Config.USART_OverSampling = USART_OVERSAMPLING_16; // Added missing config
+
+    USART_Init(&usart2);                            /* INITIALISE USART WITH CONFIGURATIONS       */
+    USART_PeripheralControl(USART2, ENABLE);        /* ENABLE USART                               */
+
+    SysTick_Delay_init();                           /* INITIALISE SYSTICK FOR MICRO-SECONDS DELAY */
+
+    // FIX: Corrected function name to match your HCSR04_Driver.c
+    GPIO_setup();                                   /* INITIALISE GPIO SETUP FOR SENSOR PINS      */
+
+    Timer2_Init();                                  /* INITIALISE TIMER2 FOR MEASURING ECHO TIME  */
+
+    uint32_t distance; // Changed to uint32_t to match GetDistance() return type
+    char string[40];
+
+    while(1)
+    {
+        distance = HCSR04_GetDistance();            /* MEASURE DISTANCE                            */
+
+        if(distance > 0 && distance < 10)           /* TURN ON BUZZER IF DISTANCE IS LESS THAN 10CM*/
+        {
+            Buzzer_ON();
+        }
+        else
+        {
+            Buzzer_OFF();
+        }
+
+        sprintf(string, "Distance : %02lu cm\r\n", distance); /* SEND AS STRING */
+        USART_Transmit_String(USART2, string);
+                                                   /* PRINT DISTANCE ON SERIAL MONITOR VIA USART   */
+
+        Delay_us(500000); // Recommend 500ms (500000us) delay so you don't flood your serial terminal
+    }
+}

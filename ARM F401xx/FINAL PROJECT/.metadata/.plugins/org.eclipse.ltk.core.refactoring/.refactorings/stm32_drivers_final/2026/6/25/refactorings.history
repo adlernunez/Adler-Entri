@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move &apos;drivers&apos; to &apos;stm32_drivers_final&apos;" description="Move &apos;drivers&apos; to &apos;stm32_drivers_final&apos;" destination="/stm32_drivers_final" element1="/stm32_drivers/drivers" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1781549319840" updateReferences="true"/>
+</session>

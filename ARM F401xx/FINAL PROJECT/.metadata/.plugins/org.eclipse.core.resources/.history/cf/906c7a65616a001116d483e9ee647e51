@@ -1,0 +1,25 @@
+#include "OLED_driver.h"
+
+void OLED_WriteCommand(I2C_Handle_t *pI2CHandle, uint8_t command) {
+    uint8_t buffer[2] = {0x00, command}; // 0x00 indicates command mode for SSD1306
+    I2C_MasterSendData(pI2CHandle, buffer, 2, OLED_ADDRESS, 0);
+}
+
+void OLED_WriteData(I2C_Handle_t *pI2CHandle, uint8_t data) {
+    uint8_t buffer[2] = {0x40, data};    // 0x40 indicates data mode
+    I2C_MasterSendData(pI2CHandle, buffer, 2, OLED_ADDRESS, 0);
+}
+
+void OLED_Init(I2C_Handle_t *pI2CHandle) {
+    // Standard initialization sequence
+    OLED_WriteCommand(pI2CHandle, 0xAE); // Display OFF
+    OLED_WriteCommand(pI2CHandle, 0x20); // Addressing mode
+    OLED_WriteCommand(pI2CHandle, 0x10);
+    OLED_WriteCommand(pI2CHandle, 0xAF); // Display ON
+}
+
+void OLED_Clear(I2C_Handle_t *pI2CHandle) {
+    for(uint16_t i = 0; i < 1024; i++) {
+        OLED_WriteData(pI2CHandle, 0x00);
+    }
+}

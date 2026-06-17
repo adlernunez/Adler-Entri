@@ -1,0 +1,25 @@
+00:26:26 **** Incremental Build of configuration Debug for project stm32_drivers_final ****
+make -j16 all 
+arm-none-eabi-gcc "../projects/ledgame.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"projects/ledgame.d" -MT"projects/ledgame.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "projects/ledgame.o"
+arm-none-eabi-gcc "../drivers/src/stm32f446xx_gpio_driver.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"drivers/src/stm32f446xx_gpio_driver.d" -MT"drivers/src/stm32f446xx_gpio_driver.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "drivers/src/stm32f446xx_gpio_driver.o"
+arm-none-eabi-gcc "../drivers/src/stm32f446xx_i2c_driver.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"drivers/src/stm32f446xx_i2c_driver.d" -MT"drivers/src/stm32f446xx_i2c_driver.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "drivers/src/stm32f446xx_i2c_driver.o"
+arm-none-eabi-gcc "../drivers/src/stm32f446xx_rcc_driver.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"drivers/src/stm32f446xx_rcc_driver.d" -MT"drivers/src/stm32f446xx_rcc_driver.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "drivers/src/stm32f446xx_rcc_driver.o"
+arm-none-eabi-gcc "../drivers/src/stm32f446xx_spi_driver.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"drivers/src/stm32f446xx_spi_driver.d" -MT"drivers/src/stm32f446xx_spi_driver.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "drivers/src/stm32f446xx_spi_driver.o"
+arm-none-eabi-gcc "../drivers/src/stm32f446xx_usart_driver.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"drivers/src/stm32f446xx_usart_driver.d" -MT"drivers/src/stm32f446xx_usart_driver.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "drivers/src/stm32f446xx_usart_driver.o"
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Startup/startup_stm32f401retx.d" -MT"Startup/startup_stm32f401retx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Startup/startup_stm32f401retx.o" "../Startup/startup_stm32f401retx.s"
+arm-none-eabi-gcc "../Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/syscalls.d" -MT"Src/syscalls.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/syscalls.o"
+arm-none-eabi-gcc "../Src/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/sysmem.d" -MT"Src/sysmem.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/sysmem.o"
+../projects/ledgame.c:1:10: fatal error: stm32f446xx_gpio_driver.h: No such file or directory
+    1 | #include "stm32f446xx_gpio_driver.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+make: *** [projects/subdir.mk:19: projects/ledgame.o] Error 1
+make: *** Waiting for unfinished jobs....
+../drivers/src/stm32f446xx_usart_driver.c: In function 'USART_IRQHandling':
+../drivers/src/stm32f446xx_usart_driver.c:647:33: warning: variable 'temp3' set but not used [-Wunused-but-set-variable]
+  647 |         uint32_t temp1 , temp2, temp3;
+      |                                 ^~~~~
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+
+00:26:27 Build Failed. 3 errors, 1 warnings. (took 1s.178ms)
+

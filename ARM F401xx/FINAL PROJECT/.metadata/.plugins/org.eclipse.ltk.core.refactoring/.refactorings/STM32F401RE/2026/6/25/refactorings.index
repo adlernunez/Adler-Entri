@@ -1,0 +1,8 @@
+1781550157058	Move 'drivers' to 'STM32F401RE'
+1781550159891	Move 'examples' to 'STM32F401RE'
+1781550166738	Move 'docs' to 'STM32F401RE'
+1781550178904	Move 'rm0390-stm32f446xx-advanced-armbased-32bit-mcus-stmicroelectronics.pdf' to 'STM32F401RE'
+1781550180706	Move 'stm32f407xx_gpio_driver.h' to 'STM32F401RE'
+1781550182261	Move 'stm32f407xx_gpio_driver.c' to 'STM32F401RE'
+1781552181368	Rename resource '1_led_game.c'
+1781628162432	Rename resource '2_UART_ULTRASONIC'

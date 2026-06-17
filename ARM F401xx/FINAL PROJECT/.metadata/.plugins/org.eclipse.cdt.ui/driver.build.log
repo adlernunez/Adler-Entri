@@ -1,0 +1,80 @@
+22:00:30 **** Incremental Build of configuration Debug for project driver ****
+make -j16 all 
+arm-none-eabi-gcc "../projects/temp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"projects/temp.d" -MT"projects/temp.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "projects/temp.o"
+arm-none-eabi-gcc "../drivers/Src/HCSR04_DRIVER.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"drivers/Src/HCSR04_DRIVER.d" -MT"drivers/Src/HCSR04_DRIVER.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "drivers/Src/HCSR04_DRIVER.o"
+arm-none-eabi-gcc "../drivers/Src/STM32F401XX_gpio_driver.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"drivers/Src/STM32F401XX_gpio_driver.d" -MT"drivers/Src/STM32F401XX_gpio_driver.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "drivers/Src/STM32F401XX_gpio_driver.o"
+arm-none-eabi-gcc "../drivers/Src/dht11_driver.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"drivers/Src/dht11_driver.d" -MT"drivers/Src/dht11_driver.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "drivers/Src/dht11_driver.o"
+arm-none-eabi-gcc "../drivers/Src/stm32f401re_spi_driver.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"drivers/Src/stm32f401re_spi_driver.d" -MT"drivers/Src/stm32f401re_spi_driver.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "drivers/Src/stm32f401re_spi_driver.o"
+arm-none-eabi-gcc "../drivers/Src/stm32f401re_usart_driver.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"drivers/Src/stm32f401re_usart_driver.d" -MT"drivers/Src/stm32f401re_usart_driver.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "drivers/Src/stm32f401re_usart_driver.o"
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Startup/startup_stm32f401retx.d" -MT"Startup/startup_stm32f401retx.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "Startup/startup_stm32f401retx.o" "../Startup/startup_stm32f401retx.s"
+arm-none-eabi-gcc "../Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/syscalls.d" -MT"Src/syscalls.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "Src/syscalls.o"
+arm-none-eabi-gcc "../Src/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DNUCLEO_F401RE -DSTM32 -DSTM32F401RETx -DSTM32F4 -c -I../Inc -I"D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/sysmem.d" -MT"Src/sysmem.o" --specs=nano.specs -mfloat-abi=hard -mthumb -o "Src/sysmem.o"
+../drivers/Src/dht11_driver.c: In function 'DHT11_Init':
+../drivers/Src/dht11_driver.c:4:5: error: 'SysTick' undeclared (first use in this function)
+    4 |     SysTick->LOAD = 15; // Set for 1us tick at 16MHz
+      |     ^~~~~~~
+../drivers/Src/dht11_driver.c:4:5: note: each undeclared identifier is reported only once for each function it appears in
+../drivers/Src/dht11_driver.c: In function 'DHT11_Read':
+../drivers/Src/dht11_driver.c:15:5: error: unknown type name 'GPIO_Handle_t'; did you mean 'GPIO_handle_t'?
+   15 |     GPIO_Handle_t dht_pin = {0};
+      |     ^~~~~~~~~~~~~
+      |     GPIO_handle_t
+../drivers/Src/dht11_driver.c:16:12: error: request for member 'pGPIOx' in something not a structure or union
+   16 |     dht_pin.pGPIOx = GPIOA;
+      |            ^
+../drivers/Src/dht11_driver.c:17:12: error: request for member 'GPIO_PinConfig' in something not a structure or union
+   17 |     dht_pin.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NO_1;
+      |            ^
+../drivers/Src/dht11_driver.c:18:12: error: request for member 'GPIO_PinConfig' in something not a structure or union
+   18 |     dht_pin.GPIO_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_PP;
+      |            ^
+../drivers/Src/dht11_driver.c:18:45: error: 'GPIO_OP_TYPE_PP' undeclared (first use in this function)
+   18 |     dht_pin.GPIO_PinConfig.GPIO_PinOPType = GPIO_OP_TYPE_PP;
+      |                                             ^~~~~~~~~~~~~~~
+../drivers/Src/dht11_driver.c:19:12: error: request for member 'GPIO_PinConfig' in something not a structure or union
+   19 |     dht_pin.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_FAST;
+      |            ^
+../drivers/Src/dht11_driver.c:20:12: error: request for member 'GPIO_PinConfig' in something not a structure or union
+   20 |     dht_pin.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_PIN_PU;
+      |            ^
+../drivers/Src/dht11_driver.c:20:50: error: 'GPIO_PIN_PU' undeclared (first use in this function); did you mean 'GPIO_PIN_SET'?
+   20 |     dht_pin.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_PIN_PU;
+      |                                                  ^~~~~~~~~~~
+      |                                                  GPIO_PIN_SET
+../drivers/Src/dht11_driver.c:23:12: error: request for member 'GPIO_PinConfig' in something not a structure or union
+   23 |     dht_pin.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUT;
+      |            ^
+../drivers/Src/dht11_driver.c:24:15: warning: passing argument 1 of 'GPIO_Init' from incompatible pointer type [-Wincompatible-pointer-types]
+   24 |     GPIO_Init(&dht_pin);
+      |               ^~~~~~~~
+      |               |
+      |               int *
+In file included from D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc/dht11_driver.h:5,
+                 from ../drivers/Src/dht11_driver.c:1:
+D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc/STM32F401XX_gpio_driver.h:39:31: note: expected 'GPIO_handle_t *' but argument is of type 'int *'
+   39 | void GPIO_Init(GPIO_handle_t *pGPIOHandle);
+      |                ~~~~~~~~~~~~~~~^~~~~~~~~~~
+../drivers/Src/dht11_driver.c:28:17: error: 'SysTick' undeclared (first use in this function)
+   28 |         while(!(SysTick->CTRL & (1<<16)));
+      |                 ^~~~~~~
+../drivers/Src/dht11_driver.c:32:12: error: request for member 'GPIO_PinConfig' in something not a structure or union
+   32 |     dht_pin.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_IN;
+      |            ^
+../drivers/Src/dht11_driver.c:33:15: warning: passing argument 1 of 'GPIO_Init' from incompatible pointer type [-Wincompatible-pointer-types]
+   33 |     GPIO_Init(&dht_pin);
+      |               ^~~~~~~~
+      |               |
+      |               int *
+D:/Projects/ARM F401xx/ASSIGNMENT 2/driver/drivers/Inc/STM32F401XX_gpio_driver.h:39:31: note: expected 'GPIO_handle_t *' but argument is of type 'int *'
+   39 | void GPIO_Init(GPIO_handle_t *pGPIOHandle);
+      |                ~~~~~~~~~~~~~~~^~~~~~~~~~~
+../drivers/Src/dht11_driver.c:37:11: warning: implicit declaration of function 'GPIO_ReadFromInputPin'; did you mean 'GPIO_READFromInputPin'? [-Wimplicit-function-declaration]
+   37 |     while(GPIO_ReadFromInputPin(GPIOA, GPIO_PIN_NO_1) == 1) {
+      |           ^~~~~~~~~~~~~~~~~~~~~
+      |           GPIO_READFromInputPin
+make: *** [drivers/Src/subdir.mk:31: drivers/Src/dht11_driver.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+
+22:00:31 Build Failed. 14 errors, 3 warnings. (took 1s.284ms)
+
