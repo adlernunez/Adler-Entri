@@ -1,4 +1,8 @@
-// include all the libraries and headers we need
+/**
+ ******************************************************************************
+ * @author         : Adler Nunez
+ ******************************************************************************
+ */
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
