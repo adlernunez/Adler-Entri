@@ -1,3 +1,9 @@
+/**
+ ******************************************************************************
+ * @author         : Adler Nunez
+ ******************************************************************************
+ */
+
 #include "stm32f446xx_gpio_driver.h"
 #define BTN_PRESSED 0 													// active-low state for the button input.
 
