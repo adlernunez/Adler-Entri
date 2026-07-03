@@ -61,5 +61,5 @@ static void led_green_handlerext( void * parameters )
 
 ## 📂 Project Links
 
-* **Source Code (GitHub):** https://github.com/adlernunez/Adler-Entri/tree/3df98d48816bbdc2a0de847ae18b9094aae3eff6/rtos_stm32d401re
+* **Source Code (GitHub):** https://github.com/adlernunez/Adler-Entri/tree/5bc2b2156c108b4dab3539cd6504e5c75b95eeeb/rtos_stm32d401re
 * **Project Video (Google Drive):** https://drive.google.com/drive/folders/1D7-ofOIOUmrdLSwfGsz7y-27M_Nt6UHO
