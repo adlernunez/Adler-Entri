@@ -316,7 +316,7 @@ static void led_red_handlerext( void * parameters )
         // Toggle the external Red LED
     	printf("task2\n");
         HAL_GPIO_TogglePin(red_led_ext_GPIO_Port, red_led_ext_Pin);
-        HAL_Delay(500);
+        HAL_Delay(1000);
         taskYIELD();
     }
 }
@@ -328,7 +328,7 @@ static void led_green_handlerext( void * parameters )
         // Toggle the external Green LED
     	printf("task3\n");
         HAL_GPIO_TogglePin(green_led_ext_GPIO_Port, green_led_ext_Pin);
-        HAL_Delay(750);
+        HAL_Delay(1000);
         taskYIELD();
     }
 }

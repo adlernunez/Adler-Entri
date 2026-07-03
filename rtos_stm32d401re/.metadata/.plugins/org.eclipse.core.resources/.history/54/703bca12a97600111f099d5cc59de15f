@@ -52,13 +52,8 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
-static void led_green_handler( void * pvParameters );
-static void led_red_handlerext( void * pvParameters );
-static void led_green_handlerext( void * pvParameters );
-
-//-----------------------------------------------
-//    				LED
-
+static void task1_handler( void * pvParameters );
+static void task2_handler( void * pvParameters );
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -75,7 +70,6 @@ int main(void)
   /* USER CODE BEGIN 1 */
 	TaskHandle_t task1_handle;
 	TaskHandle_t task2_handle;
-	TaskHandle_t task3_handle;
 	BaseType_t xReturned;
   /* USER CODE END 1 */
 
@@ -99,51 +93,23 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-  /*
- 	xReturned = xTaskCreate( task1_handler,		//* Function that implements the task.
-                          "TASK1",		 		//* Text name for the task.
-                          100,					//* Stack size in words, not bytes.
-                          "HELLO FROM TASK1",   //* Parameter passed into the task.
-                          2,					//* Priority at which the task is created.
-                          &task1_handle);		//* Used to pass out the created task's handle.
+  xReturned = xTaskCreate( task1_handler,		/* Function that implements the task. */
+                          "TASK1",		 		/* Text name for the task. */
+                          100,					/* Stack size in words, not bytes. */
+                          "HELLO FROM TASK1",   /* Parameter passed into the task. */
+                          2,					/* Priority at which the task is created. */
+                          &task1_handle);		/* Used to pass out the created task's handle. */
 
   configASSERT(xReturned == pdPASS);
 
-  xReturned = xTaskCreate( task2_handler,		//* Function that implements the task.
-                           "TASK2",		 		//* Text name for the task.
-                           100,					//* Stack size in words, not bytes.
-                           "HELLO FROM TASK2",  //* Parameter passed into the task.
-                           2,					//* Priority at which the task is created.
-                           &task2_handle);		//* Used to pass out the created task's handle.
+  xReturned = xTaskCreate( task2_handler,		/* Function that implements the task. */
+                           "TASK2",		 		/* Text name for the task. */
+                           100,					/* Stack size in words, not bytes. */
+                           "HELLO FROM TASK2",   /* Parameter passed into the task. */
+                           2,					/* Priority at which the task is created. */
+                           &task2_handle);		/* Used to pass out the created task's handle. */
 
    configASSERT(xReturned == pdPASS);
-*/
-  xReturned = xTaskCreate( led_green_handler,		//* Function that implements the task.
-                            "green led task",		 		//* Text name for the task.
-                            100,					//* Stack size in words, not bytes.
-                            NULL,   //* Parameter passed into the task.
-                            2,					//* Priority at which the task is created.
-                            &task1_handle);		//* Used to pass out the created task's handle.
-
-  configASSERT(xReturned == pdPASS);
-
-  xReturned = xTaskCreate( led_red_handlerext,		//* Function that implements the task.
-                            "green led task",		 		//* Text name for the task.
-                            100,					//* Stack size in words, not bytes.
-                            NULL,   //* Parameter passed into the task.
-                            2,					//* Priority at which the task is created.
-                            &task1_handle);		//* Used to pass out the created task's handle.
-
-  configASSERT(xReturned == pdPASS);
-
-  xReturned = xTaskCreate( led_green_handlerext,		//* Function that implements the task.
-                            "green led task",		 		//* Text name for the task.
-                            100,					//* Stack size in words, not bytes.
-                            NULL,   //* Parameter passed into the task.
-                            2,					//* Priority at which the task is created.
-                            &task1_handle);		//* Used to pass out the created task's handle.
-
-  configASSERT(xReturned == pdPASS);
 
    vTaskStartScheduler();
   /* USER CODE END 2 */
@@ -254,7 +220,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LD2_Pin|red_led_ext_Pin|green_led_ext_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LD2_Pin|red_led_ext_Pin|Green_led_ext_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : B1_Pin */
   GPIO_InitStruct.Pin = B1_Pin;
@@ -262,8 +228,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : LD2_Pin red_led_ext_Pin green_led_ext_Pin */
-  GPIO_InitStruct.Pin = LD2_Pin|red_led_ext_Pin|green_led_ext_Pin;
+  /*Configure GPIO pins : LD2_Pin red_led_ext_Pin Green_led_ext_Pin */
+  GPIO_InitStruct.Pin = LD2_Pin|red_led_ext_Pin|Green_led_ext_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -272,7 +238,6 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-/*
 static void task1_handler( void * parameters )
 {
 	while(1)
@@ -294,48 +259,6 @@ static void task2_handler( void * parameters )
 	    vTaskDelay(pdMS_TO_TICKS(500));
 	}
 }
-*/
-/* USER CODE BEGIN 4 */
-
-static void led_green_handler( void * parameters )
-{
-    while(1)
-    {
-        // Toggle the onboard Green LED (LD2)
-    	printf("task1\n");
-        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-       HAL_Delay(1000);
-       taskYIELD();
-    }
-}
-
-static void led_red_handlerext( void * parameters )
-{
-    while(1)
-    {
-        // Toggle the external Red LED
-    	printf("task2\n");
-        HAL_GPIO_TogglePin(red_led_ext_GPIO_Port, red_led_ext_Pin);
-        HAL_Delay(500);
-        taskYIELD();
-    }
-}
-
-static void led_green_handlerext( void * parameters )
-{
-    while(1)
-    {
-        // Toggle the external Green LED
-    	printf("task3\n");
-        HAL_GPIO_TogglePin(green_led_ext_GPIO_Port, green_led_ext_Pin);
-        HAL_Delay(750);
-        taskYIELD();
-    }
-}
-
-/* USER CODE END 4 */
-//                LED
-
 /* USER CODE END 4 */
 
 /**

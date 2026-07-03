@@ -1,21 +1,64 @@
-11:10:15 **** Incremental Build of configuration Debug for project RTOS1 ****
+12:40:32 **** Incremental Build of configuration Debug for project RTOS1 ****
 make -j16 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I"D:/Projects/rtos_stm32d401re/RTOS1/ThirdParty/FreeRTOS/include" -I"D:/Projects/rtos_stm32d401re/RTOS1/ThirdParty/FreeRTOS" -I"D:/Projects/rtos_stm32d401re/RTOS1/ThirdParty/FreeRTOS/portable/GCC/ARM_CM4F" -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:103:45: warning: "/*" within comment [-Wcomment]
+  103 |   xReturned = xTaskCreate( task1_handler,  //* Function that implements the task.
+      |                                              
+../Core/Src/main.c:104:41: warning: "/*" within comment [-Wcomment]
+  104 |                           "TASK1",     //* Text name for the task.
+      |                                          
+../Core/Src/main.c:105:37: warning: "/*" within comment [-Wcomment]
+  105 |                           100,     //* Stack size in words, not bytes.
+      |                                      
+../Core/Src/main.c:106:50: warning: "/*" within comment [-Wcomment]
+  106 |                           "HELLO FROM TASK1",   //* Parameter passed into the task.
+      |                                                   
+../Core/Src/main.c:107:35: warning: "/*" within comment [-Wcomment]
+  107 |                           2,     //* Priority at which the task is created.
+      |                                    
+../Core/Src/main.c:108:45: warning: "/*" within comment [-Wcomment]
+  108 |                           &task1_handle);  //* Used to pass out the created task's handle.
+      |                                              
+../Core/Src/main.c:112:45: warning: "/*" within comment [-Wcomment]
+  112 |   xReturned = xTaskCreate( task2_handler,  //* Function that implements the task.
+      |                                              
+../Core/Src/main.c:113:42: warning: "/*" within comment [-Wcomment]
+  113 |                            "TASK2",     //* Text name for the task.
+      |                                           
+../Core/Src/main.c:114:38: warning: "/*" within comment [-Wcomment]
+  114 |                            100,     //* Stack size in words, not bytes.
+      |                                       
+../Core/Src/main.c:115:50: warning: "/*" within comment [-Wcomment]
+  115 |                            "HELLO FROM TASK2",  //* Parameter passed into the task.
+      |                                                   
+../Core/Src/main.c:116:36: warning: "/*" within comment [-Wcomment]
+  116 |                            2,     //* Priority at which the task is created.
+      |                                     
+../Core/Src/main.c:117:46: warning: "/*" within comment [-Wcomment]
+  117 |                            &task2_handle);  //* Used to pass out the created task's handle.
+      |                                               
+../Core/Src/main.c:78:15: warning: unused variable 'task3_handle' [-Wunused-variable]
+   78 |  TaskHandle_t task3_handle;
+      |               ^~~~~~~~~~~~
+../Core/Src/main.c:77:15: warning: unused variable 'task2_handle' [-Wunused-variable]
+   77 |  TaskHandle_t task2_handle;
+      |               ^~~~~~~~~~~~
 arm-none-eabi-gcc -o "RTOS1.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Projects\rtos_stm32d401re\RTOS1\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="RTOS1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: RTOS1.elf
  
 arm-none-eabi-size   RTOS1.elf 
 arm-none-eabi-objdump -h -S  RTOS1.elf  > "RTOS1.list"
    text	   data	    bss	    dec	    hex	filename
-  18320	    128	  78824	  97272	  17bf8	RTOS1.elf
+  18120	    128	  78824	  97072	  17b30	RTOS1.elf
 Finished building: default.size.stdout
  
 Finished building: RTOS1.list
  
-11:10:22 **** Incremental Build of configuration Debug for project RTOS1 ****
+12:40:41 **** Incremental Build of configuration Debug for project RTOS1 ****
 make -j16 all 
 arm-none-eabi-size   RTOS1.elf 
    text	   data	    bss	    dec	    hex	filename
-  18320	    128	  78824	  97272	  17bf8	RTOS1.elf
+  18120	    128	  78824	  97072	  17b30	RTOS1.elf
 Finished building: default.size.stdout
  
