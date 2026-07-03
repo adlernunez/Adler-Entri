@@ -1,0 +1,21 @@
+11:10:15 **** Incremental Build of configuration Debug for project RTOS1 ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I"D:/Projects/rtos_stm32d401re/RTOS1/ThirdParty/FreeRTOS/include" -I"D:/Projects/rtos_stm32d401re/RTOS1/ThirdParty/FreeRTOS" -I"D:/Projects/rtos_stm32d401re/RTOS1/ThirdParty/FreeRTOS/portable/GCC/ARM_CM4F" -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "RTOS1.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\Projects\rtos_stm32d401re\RTOS1\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="RTOS1.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: RTOS1.elf
+ 
+arm-none-eabi-size   RTOS1.elf 
+arm-none-eabi-objdump -h -S  RTOS1.elf  > "RTOS1.list"
+   text	   data	    bss	    dec	    hex	filename
+  18320	    128	  78824	  97272	  17bf8	RTOS1.elf
+Finished building: default.size.stdout
+ 
+Finished building: RTOS1.list
+ 
+11:10:22 **** Incremental Build of configuration Debug for project RTOS1 ****
+make -j16 all 
+arm-none-eabi-size   RTOS1.elf 
+   text	   data	    bss	    dec	    hex	filename
+  18320	    128	  78824	  97272	  17bf8	RTOS1.elf
+Finished building: default.size.stdout
+ 

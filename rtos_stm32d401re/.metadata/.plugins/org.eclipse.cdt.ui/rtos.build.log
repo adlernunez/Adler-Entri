@@ -1,0 +1,75 @@
+23:51:46 **** Incremental Build of configuration Debug for project rtos ****
+make -j16 all 
+arm-none-eabi-gcc "../thridparty/FreeRTOS/portable/MemMang/heap_4.c" -mcpu=cortex-m4 -std=gnu11 -g -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Drivers/CMSIS/Include -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/portable/GCC/ARM_CM4F" -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/include" -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"thridparty/FreeRTOS/portable/MemMang/heap_4.d" -MT"thridparty/FreeRTOS/portable/MemMang/heap_4.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "thridparty/FreeRTOS/portable/MemMang/heap_4.o"
+arm-none-eabi-gcc "../thridparty/FreeRTOS/portable/GCC/ARM_CM4F/port.c" -mcpu=cortex-m4 -std=gnu11 -g -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Drivers/CMSIS/Include -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/portable/GCC/ARM_CM4F" -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/include" -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"thridparty/FreeRTOS/portable/GCC/ARM_CM4F/port.d" -MT"thridparty/FreeRTOS/portable/GCC/ARM_CM4F/port.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "thridparty/FreeRTOS/portable/GCC/ARM_CM4F/port.o"
+arm-none-eabi-gcc "../thridparty/FreeRTOS/croutine.c" -mcpu=cortex-m4 -std=gnu11 -g -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Drivers/CMSIS/Include -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/portable/GCC/ARM_CM4F" -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/include" -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"thridparty/FreeRTOS/croutine.d" -MT"thridparty/FreeRTOS/croutine.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "thridparty/FreeRTOS/croutine.o"
+arm-none-eabi-gcc "../thridparty/FreeRTOS/event_groups.c" -mcpu=cortex-m4 -std=gnu11 -g -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Drivers/CMSIS/Include -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/portable/GCC/ARM_CM4F" -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/include" -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"thridparty/FreeRTOS/event_groups.d" -MT"thridparty/FreeRTOS/event_groups.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "thridparty/FreeRTOS/event_groups.o"
+arm-none-eabi-gcc "../thridparty/FreeRTOS/list.c" -mcpu=cortex-m4 -std=gnu11 -g -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Drivers/CMSIS/Include -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/portable/GCC/ARM_CM4F" -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/include" -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"thridparty/FreeRTOS/list.d" -MT"thridparty/FreeRTOS/list.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "thridparty/FreeRTOS/list.o"
+arm-none-eabi-gcc "../thridparty/FreeRTOS/queue.c" -mcpu=cortex-m4 -std=gnu11 -g -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Drivers/CMSIS/Include -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/portable/GCC/ARM_CM4F" -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/include" -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"thridparty/FreeRTOS/queue.d" -MT"thridparty/FreeRTOS/queue.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "thridparty/FreeRTOS/queue.o"
+arm-none-eabi-gcc "../thridparty/FreeRTOS/stream_buffer.c" -mcpu=cortex-m4 -std=gnu11 -g -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Drivers/CMSIS/Include -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/portable/GCC/ARM_CM4F" -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/include" -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"thridparty/FreeRTOS/stream_buffer.d" -MT"thridparty/FreeRTOS/stream_buffer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "thridparty/FreeRTOS/stream_buffer.o"
+arm-none-eabi-gcc "../thridparty/FreeRTOS/tasks.c" -mcpu=cortex-m4 -std=gnu11 -g -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Drivers/CMSIS/Include -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/portable/GCC/ARM_CM4F" -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/include" -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"thridparty/FreeRTOS/tasks.d" -MT"thridparty/FreeRTOS/tasks.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "thridparty/FreeRTOS/tasks.o"
+arm-none-eabi-gcc "../thridparty/FreeRTOS/timers.c" -mcpu=cortex-m4 -std=gnu11 -g -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Drivers/CMSIS/Include -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/portable/GCC/ARM_CM4F" -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/include" -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"thridparty/FreeRTOS/timers.d" -MT"thridparty/FreeRTOS/timers.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "thridparty/FreeRTOS/timers.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c" -mcpu=cortex-m4 -std=gnu11 -g -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Drivers/CMSIS/Include -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/portable/GCC/ARM_CM4F" -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/include" -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c" -mcpu=cortex-m4 -std=gnu11 -g -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Drivers/CMSIS/Include -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/portable/GCC/ARM_CM4F" -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/include" -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c" -mcpu=cortex-m4 -std=gnu11 -g -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Drivers/CMSIS/Include -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/portable/GCC/ARM_CM4F" -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/include" -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c" -mcpu=cortex-m4 -std=gnu11 -g -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Drivers/CMSIS/Include -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/portable/GCC/ARM_CM4F" -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/include" -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o"
+In file included from ../thridparty/FreeRTOS/portable/GCC/ARM_CM4F/port.c:32:
+D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/include/FreeRTOS.h:57:10: fatal error: FreeRTOSConfig.h: No such file or directory
+   57 | #include "FreeRTOSConfig.h"
+      |          ^~~~~~~~~~~~~~~~~~
+compilation terminated.
+In file included from ../thridparty/FreeRTOS/portable/MemMang/heap_4.c:42:
+D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/include/FreeRTOS.h:57:10: fatal error: FreeRTOSConfig.h: No such file or directory
+   57 | #include "FreeRTOSConfig.h"
+      |          ^~~~~~~~~~~~~~~~~~
+compilation terminated.
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c" -mcpu=cortex-m4 -std=gnu11 -g -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Drivers/CMSIS/Include -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/portable/GCC/ARM_CM4F" -I"D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/include" -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o"
+In file included from ../thridparty/FreeRTOS/croutine.c:27:
+D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/include/FreeRTOS.h:57:10: fatal error: FreeRTOSConfig.h: No such file or directory
+   57 | #include "FreeRTOSConfig.h"
+      |          ^~~~~~~~~~~~~~~~~~
+compilation terminated.
+make: *** [thridparty/FreeRTOS/portable/GCC/ARM_CM4F/subdir.mk:19: thridparty/FreeRTOS/portable/GCC/ARM_CM4F/port.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [thridparty/FreeRTOS/portable/MemMang/subdir.mk:19: thridparty/FreeRTOS/portable/MemMang/heap_4.o] Error 1
+make: *** [thridparty/FreeRTOS/subdir.mk:37: thridparty/FreeRTOS/croutine.o] Error 1
+In file included from ../thridparty/FreeRTOS/event_groups.c:36:
+D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/include/FreeRTOS.h:57:10: fatal error: FreeRTOSConfig.h: No such file or directory
+   57 | #include "FreeRTOSConfig.h"
+      |          ^~~~~~~~~~~~~~~~~~
+compilation terminated.
+make: *** [thridparty/FreeRTOS/subdir.mk:37: thridparty/FreeRTOS/event_groups.o] Error 1
+In file included from ../thridparty/FreeRTOS/list.c:35:
+D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/include/FreeRTOS.h:57:10: fatal error: FreeRTOSConfig.h: No such file or directory
+   57 | #include "FreeRTOSConfig.h"
+      |          ^~~~~~~~~~~~~~~~~~
+compilation terminated.
+In file included from ../thridparty/FreeRTOS/queue.c:35:
+D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/include/FreeRTOS.h:57:10: fatal error: FreeRTOSConfig.h: No such file or directory
+   57 | #include "FreeRTOSConfig.h"
+      |          ^~~~~~~~~~~~~~~~~~
+make: *** [thridparty/FreeRTOS/subdir.mk:37: thridparty/FreeRTOS/list.o] Error 1
+compilation terminated.
+In file included from ../thridparty/FreeRTOS/stream_buffer.c:37:
+D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/include/FreeRTOS.h:57:10: fatal error: FreeRTOSConfig.h: No such file or directory
+   57 | #include "FreeRTOSConfig.h"
+      |          ^~~~~~~~~~~~~~~~~~
+compilation terminated.
+make: *** [thridparty/FreeRTOS/subdir.mk:37: thridparty/FreeRTOS/queue.o] Error 1
+make: *** [thridparty/FreeRTOS/subdir.mk:37: thridparty/FreeRTOS/stream_buffer.o] Error 1
+In file included from ../thridparty/FreeRTOS/tasks.c:37:
+D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/include/FreeRTOS.h:57:10: fatal error: FreeRTOSConfig.h: No such file or directory
+   57 | #include "FreeRTOSConfig.h"
+      |          ^~~~~~~~~~~~~~~~~~
+compilation terminated.
+In file included from ../thridparty/FreeRTOS/timers.c:35:
+D:/Projects/rtos_stm32d401re/rtos/thridparty/FreeRTOS/include/FreeRTOS.h:57:10: fatal error: FreeRTOSConfig.h: No such file or directory
+   57 | #include "FreeRTOSConfig.h"
+      |          ^~~~~~~~~~~~~~~~~~
+compilation terminated.
+make: *** [thridparty/FreeRTOS/subdir.mk:37: thridparty/FreeRTOS/tasks.o] Error 1
+make: *** [thridparty/FreeRTOS/subdir.mk:37: thridparty/FreeRTOS/timers.o] Error 1
+"make -j16 all" terminated with exit code 2. Build might be incomplete.
+
+23:51:48 Build Failed. 19 errors, 0 warnings. (took 1s.564ms)
+
